@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${ROOTSYS}/include",
+                "/home/ilaria/Installed/geant4/geant4-v11.2.2-install/include",
+                "/home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4",
+                "/home/ilaria/Simulations/simBeta/B3a/include"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-x64"
+        }
+    ],
+    "version": 4
+}
