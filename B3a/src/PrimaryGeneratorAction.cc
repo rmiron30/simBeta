@@ -124,7 +124,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* event)
   G4double dx0 = 1 * cm, dy0 = 1 * cm, dz0 = 1 * cm;
   x0 += dx0 * (G4UniformRand() - 0.5);
   y0 += dy0 * (G4UniformRand() - 0.5);
-  z0 += dz0 * (G4UniformRand() - 0.5);
+  // z0 += dz0 * (G4UniformRand() - 0.5);
   fParticleGun->SetParticlePosition(G4ThreeVector(x0, y0, z0));
   G4ThreeVector direction = GenerateIsotropicDirection();
   fParticleGun->SetParticleMomentumDirection(direction);

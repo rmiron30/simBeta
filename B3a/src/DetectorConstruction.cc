@@ -96,7 +96,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   //
   G4double cryst_dX = 6 * cm, cryst_dY = 6 * cm, cryst_dZ = 3 * cm;
   G4int nb_cryst = 32;
-  G4int nb_rings = 9;
+  G4int nb_rings = 1;
   //
   G4double dPhi = twopi / nb_cryst, half_dPhi = 0.5 * dPhi;
   G4double cosdPhi = std::cos(half_dPhi);
@@ -105,7 +105,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4double ring_R1 = 0.5 * cryst_dY / tandPhi;
   G4double ring_R2 = (ring_R1 + cryst_dZ) / cosdPhi;
   //
-  G4double detector_dZ = nb_rings * cryst_dX;
+  // G4double detector_dZ = nb_rings * cryst_dX;
+  G4double detector_dZ = 9 * cryst_dX;
   //
   G4NistManager* nist = G4NistManager::Instance();
   G4Material* default_mat = nist->FindOrBuildMaterial("G4_AIR");
@@ -216,25 +217,32 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
                     fCheckOverlaps);  // checking overlaps
 
   //
-  // patient
+  // implanter crystal, thin disk, 2 mm thickness
   //
-  // G4double patient_radius = 8 * cm;
-  // G4double patient_dZ = 10 * cm;
-  // G4Material* patient_mat = nist->FindOrBuildMaterial("G4_BRAIN_ICRP");
+  // G4double sample_radius = 2 * cm;
+  // G4double sample_dZ = 1 * mm;
+  // G4double density;
+	// G4int numberElements;  
+  // G4NistManager* man=G4NistManager::Instance();
+	// G4Element* K = man->FindOrBuildElement (19);
+	// G4Element* Cl = man->FindOrBuildElement(17);
+	// G4Material*	KCl = new G4Material( "KCl", density= 1.98 *g/cm3, numberElements=2 );
+	// KCl->AddElement( K,  1 );
+	// KCl->AddElement( Cl,  1);
 
-  // auto solidPatient = new G4Tubs("Patient", 0., patient_radius, 0.5 * patient_dZ, 0., twopi);
+  // auto solidsample = new G4Tubs("sample", 0., sample_radius, 0.5 * sample_dZ, 0., twopi);
 
-  // auto logicPatient = new G4LogicalVolume(solidPatient,  // its solid
-  //                                         patient_mat,  // its material
-  //                                         "PatientLV");  // its name
+  // auto logicsample = new G4LogicalVolume(solidsample,  // its solid
+  //                                         KCl,  // its material
+  //                                         "sampleLV");  // its name
 
-  //
-  // place patient in world
-  //
+  
+  // // place sample in world
+  
   // new G4PVPlacement(nullptr,  // no rotation
   //                   G4ThreeVector(),  // at (0,0,0)
-  //                   logicPatient,  // its logical volume
-  //                   "Patient",  // its name
+  //                   logicsample,  // its logical volume
+  //                   "sample",  // its name
   //                   logicWorld,  // its mother  volume
   //                   false,  // no boolean operation
   //                   0,  // copy number
@@ -252,25 +260,6 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   //
   return physWorld;
 }
-
-// G4VPhysicalVolume* DetectorConstruction::ConstructWorld()
-// {
-
-//     G4double worldX = 2*m;
-//     G4double worldY = 2*m;
-//     G4double worldZ = 2*m;
-//     G4Material* vaccum = new G4Material("GalacticVacuum", 1., 1.01*g/mole,
-//                            CLHEP::universe_mean_density, 
-//                            kStateGas, 3.e-18*pascal, 2.73*kelvin);
-  
-//     G4Box* worldSolid = new G4Box("worldSolid",worldX,worldY,worldZ);
-//     worldLogic = new G4LogicalVolume(worldSolid, vaccum,"worldLogic", 0,0,0);
-                                             
-//     //worldLogic->SetVisAttributes(G4ktVisAttributes::Invisible);
-//     G4VPhysicalVolume* worldPhys = new G4PVPlacement(0, G4ThreeVector(), worldLogic, "world", 0, false, 0);
-//     return worldPhys;
-
-// }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
