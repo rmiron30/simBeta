@@ -92,7 +92,7 @@ void EventAction::EndOfEventAction(const G4Event* evt)
 		energyDeposit = *((*eventMap2)[0]);	    
 	}
 	if(eventMap2->entries() !=0)
-		std::cout << "!!!" << "front" << " " << fCollID_betaFront << " " << energyDeposit << " " << eventMap2->entries() << std::endl;
+		std::cout << "!!!" << "front" << " " << fCollID_betaFront << " " << energyDeposit/keV << " " << eventMap2->entries() << std::endl;
 
   // // Energy in betaBAck
 

@@ -36,6 +36,11 @@
 #include "G4SystemOfUnits.hh"
 #include "Randomize.hh"
 
+#include <fstream>
+#include "globals.hh"
+#include "G4ParticleDefinition.hh"
+#include "G4UnitsTable.hh"
+
 namespace B3
 {
 
@@ -47,13 +52,15 @@ PrimaryGeneratorAction::PrimaryGeneratorAction()
   fParticleGun = new G4ParticleGun(n_particle);
 
   // default particle kinematic
+  
 
   G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
-  G4ParticleDefinition* particle = particleTable->FindParticle("chargedgeantino");
+  G4ParticleDefinition* particle = particleTable->FindParticle("e-");
   fParticleGun->SetParticleDefinition(particle);
   fParticleGun->SetParticlePosition(G4ThreeVector(0., 0., 0.));
-  fParticleGun->SetParticleEnergy(1 * eV);
-  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(1., 0., 0.));
+  fParticleGun->SetParticleEnergy(1 * MeV);
+  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0., 0., 1.));
+  
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -62,6 +69,36 @@ PrimaryGeneratorAction::~PrimaryGeneratorAction()
 {
   delete fParticleGun;
 }
+
+G4ThreeVector PrimaryGeneratorAction::GenerateIsotropicDirection( G4double thetaMin,
+                                                                 G4double thetaMax ,
+                                                                 G4double phiMin,
+                                                                 G4double phiMax)
+{
+   if(thetaMin < 0 || thetaMin > 2.*M_PI || thetaMax < 0 || thetaMax > 2.*M_PI )
+   {
+       std::cout << "angles not in the limit " << std::endl;
+       return G4ThreeVector(0,0,0);
+   }
+   if(thetaMin >= thetaMax)
+   {
+       std::cout << " theta min has to be smaller than theta max" << std::endl;
+       return G4ThreeVector(0,0,0);
+   }
+   
+   G4double randomPhi = G4UniformRand()*(phiMax - phiMin) + phiMin; 
+   G4double cosThetaMin = cos(thetaMin);
+   G4double cosThetaMax = cos(thetaMax); 
+   G4double randomCosTheta = G4UniformRand()*(cosThetaMin - cosThetaMax) + cosThetaMax;
+   G4double randomTheta = acos(randomCosTheta);
+
+   G4double x =  sin(randomTheta)*cos(randomPhi);
+   G4double y = sin(randomTheta)*sin(randomPhi);
+   G4double z = randomCosTheta;                                                      
+   G4ThreeVector randDir = G4ThreeVector(x, y, z);
+   return randDir;
+}     
+
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -81,14 +118,16 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* event)
 
   // randomized position
   //
-  /// G4double x0  = 0*cm, y0  = 0*cm, z0  = 0*cm;
-  /// G4double dx0 = 0*cm, dy0 = 0*cm, dz0 = 0*cm;
-  G4double x0 = 4 * cm, y0 = 4 * cm, z0 = 4 * cm;
+  G4double x0  = 0*cm, y0  = 0*cm, z0  = 0*cm;
+  // G4double dx0 = 0*cm, dy0 = 0*cm, dz0 = 0*cm;
+  // G4double x0 = 2 * cm, y0 = 2 * cm, z0 = 2 * cm;
   G4double dx0 = 1 * cm, dy0 = 1 * cm, dz0 = 1 * cm;
   x0 += dx0 * (G4UniformRand() - 0.5);
   y0 += dy0 * (G4UniformRand() - 0.5);
   z0 += dz0 * (G4UniformRand() - 0.5);
   fParticleGun->SetParticlePosition(G4ThreeVector(x0, y0, z0));
+  G4ThreeVector direction = GenerateIsotropicDirection();
+  fParticleGun->SetParticleMomentumDirection(direction);
 
   // create vertex
   //
@@ -98,3 +137,6 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* event)
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 }  // namespace B3
+
+// VITO GEANT
+
