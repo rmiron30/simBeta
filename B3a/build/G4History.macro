@@ -27,3 +27,10 @@
 /vis/viewer/set/autoRefresh true
 /vis/viewer/refresh
 /vis/verbose warnings
+/run/beamOn 10
+/vis/scene/notifyHandlers scene-0
+/analysis/h1/getVector
+/analysis/h2/getVector
+/run/beamOn 100
+/analysis/h1/getVector
+/analysis/h2/getVector

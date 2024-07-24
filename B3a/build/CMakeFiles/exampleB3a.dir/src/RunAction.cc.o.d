@@ -247,15 +247,33 @@ CMakeFiles/exampleB3a.dir/src/RunAction.cc.o: \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/globals.hh \
  /home/ilaria/Simulations/simBeta/B3a/include/PrimaryGeneratorAction.hh \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VUserPrimaryGeneratorAction.hh \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4AccumulableManager.hh \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Accumulable.hh \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4AccumulableManager.icc \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ParticleGun.hh \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VPrimaryGenerator.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Event.hh \
+ /usr/include/c++/13/set /usr/include/c++/13/bits/stl_set.h \
+ /usr/include/c++/13/bits/stl_multiset.h \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/evtdefs.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Allocator.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4AllocatorPool.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4PrimaryVertex.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4PrimaryParticle.hh \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ThreeVector.hh \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/CLHEP/Vector/ThreeVector.h \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/CLHEP/Utility/defs.h \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/CLHEP/Vector/ThreeVector.icc \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/pwdefs.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4HCofThisEvent.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VHitsCollection.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4DCofThisEvent.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VDigiCollection.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4TrajectoryContainer.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VTrajectory.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VUserEventInformation.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Profiler.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Profiler.icc \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/PTL/Globals.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/PTL/Types.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/PTL/Utility.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ParticleGun.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VPrimaryGenerator.hh \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ParticleDefinition.hh \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4PDefManager.hh \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4AutoLock.hh \
@@ -271,34 +289,17 @@ CMakeFiles/exampleB3a.dir/src/RunAction.cc.o: \
  /usr/include/c++/13/bits/atomic_futex.h /usr/include/c++/13/atomic \
  /usr/include/c++/13/bits/std_thread.h /usr/include/c++/13/thread \
  /usr/include/c++/13/bits/this_thread_sleep.h \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/pwdefs.hh \
  /usr/include/c++/13/stdlib.h \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/CLHEP/Units/PhysicalConstants.h \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/CLHEP/Units/SystemOfUnits.h \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ParticleDefinition.icc \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4PrimaryVertex.hh \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Allocator.hh \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4AllocatorPool.hh \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4PrimaryParticle.hh \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ParticleMomentum.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4AccumulableManager.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Accumulable.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4AccumulableManager.icc \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Run.hh \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Profiler.hh \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Profiler.icc \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/PTL/Globals.hh \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/PTL/Types.hh \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/PTL/Utility.hh \
- /usr/include/c++/13/set /usr/include/c++/13/bits/stl_set.h \
- /usr/include/c++/13/bits/stl_multiset.h \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4RunManager.hh \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Event.hh \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/evtdefs.hh \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4HCofThisEvent.hh \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VHitsCollection.hh \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4DCofThisEvent.hh \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VDigiCollection.hh \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4TrajectoryContainer.hh \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VTrajectory.hh \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VUserEventInformation.hh \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4EventManager.hh \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4StackManager.hh \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4UserStackingAction.hh \

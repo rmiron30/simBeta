@@ -227,12 +227,50 @@ CMakeFiles/exampleB3a.dir/src/PrimaryGeneratorAction.cc.o: \
  /usr/include/c++/13/bits/parse_numbers.h \
  /usr/include/c++/13/bits/std_mutex.h \
  /usr/include/c++/13/bits/unique_lock.h \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ChargedGeantino.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Event.hh \
+ /usr/include/c++/13/set /usr/include/c++/13/bits/stl_set.h \
+ /usr/include/c++/13/bits/stl_multiset.h \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/globals.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/evtdefs.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Allocator.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4AllocatorPool.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4PrimaryVertex.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4PrimaryParticle.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ThreeVector.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/CLHEP/Vector/ThreeVector.h \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/CLHEP/Utility/defs.h \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/CLHEP/Vector/ThreeVector.icc \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/pwdefs.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4HCofThisEvent.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VHitsCollection.hh \
+ /usr/include/c++/13/vector /usr/include/c++/13/bits/stl_uninitialized.h \
+ /usr/include/c++/13/bits/stl_vector.h \
+ /usr/include/c++/13/bits/stl_bvector.h \
+ /usr/include/c++/13/bits/vector.tcc \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4DCofThisEvent.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VDigiCollection.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4TrajectoryContainer.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VTrajectory.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VUserEventInformation.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Profiler.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Profiler.icc \
+ /usr/include/c++/13/functional /usr/include/c++/13/bits/std_function.h \
+ /usr/include/c++/13/unordered_map \
+ /usr/include/c++/13/bits/unordered_map.h \
+ /usr/include/c++/13/bits/hashtable.h \
+ /usr/include/c++/13/bits/hashtable_policy.h \
+ /usr/include/c++/13/bits/enable_special_members.h \
+ /usr/include/c++/13/array /usr/include/c++/13/compare \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/PTL/Globals.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/PTL/Types.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/PTL/Utility.hh \
+ /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ParticleGun.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VPrimaryGenerator.hh \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ParticleDefinition.hh \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4PDefManager.hh \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4AutoLock.hh \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Threading.hh \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/globals.hh \
  /usr/include/c++/13/chrono /usr/include/c++/13/condition_variable \
  /usr/include/c++/13/bits/shared_ptr.h \
  /usr/include/c++/13/bits/shared_ptr_base.h \
@@ -242,34 +280,19 @@ CMakeFiles/exampleB3a.dir/src/PrimaryGeneratorAction.cc.o: \
  /usr/include/c++/13/bits/atomic_base.h \
  /usr/include/c++/13/bits/atomic_lockfree_defines.h \
  /usr/include/c++/13/bits/atomic_futex.h /usr/include/c++/13/atomic \
- /usr/include/c++/13/bits/std_function.h \
  /usr/include/c++/13/bits/std_thread.h /usr/include/c++/13/thread \
- /usr/include/c++/13/bits/this_thread_sleep.h /usr/include/c++/13/vector \
- /usr/include/c++/13/bits/stl_uninitialized.h \
- /usr/include/c++/13/bits/stl_vector.h \
- /usr/include/c++/13/bits/stl_bvector.h \
- /usr/include/c++/13/bits/vector.tcc \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/pwdefs.hh \
+ /usr/include/c++/13/bits/this_thread_sleep.h \
  /usr/include/c++/13/stdlib.h \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/CLHEP/Units/PhysicalConstants.h \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/CLHEP/Units/SystemOfUnits.h \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ParticleDefinition.icc \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ParticleMomentum.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ChargedGeantino.hh \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4IonTable.hh \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Ions.hh \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ParticleTable.hh \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ParticleTableIterator.hh \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ParticleTable.icc \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ParticleGun.hh \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VPrimaryGenerator.hh \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ThreeVector.hh \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/CLHEP/Vector/ThreeVector.h \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/CLHEP/Utility/defs.h \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/CLHEP/Vector/ThreeVector.icc \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4PrimaryVertex.hh \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Allocator.hh \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4AllocatorPool.hh \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4PrimaryParticle.hh \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ParticleMomentum.hh \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ParticleTable.hh \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4SystemOfUnits.hh \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/Randomize.hh \
@@ -283,7 +306,6 @@ CMakeFiles/exampleB3a.dir/src/PrimaryGeneratorAction.cc.o: \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/CLHEP/Random/RandomEngine.icc \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/CLHEP/Random/JamesRandom.h \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/CLHEP/Random/MixMaxRng.h \
- /usr/include/c++/13/array /usr/include/c++/13/compare \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/CLHEP/Random/MTwistEngine.h \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/CLHEP/Random/RanecuEngine.h \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/CLHEP/Random/RanluxEngine.h \
@@ -329,4 +351,7 @@ CMakeFiles/exampleB3a.dir/src/PrimaryGeneratorAction.cc.o: \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/CLHEP/Random/RandPoisson.icc \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/CLHEP/Random/RandPoissonQ.icc \
  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/CLHEP/Random/RandStudentT.h \
- /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/CLHEP/Random/RandStudentT.icc
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/CLHEP/Random/RandStudentT.icc \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ParticleDefinition.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4UnitsTable.hh \
+ /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4UnitsTable.icc

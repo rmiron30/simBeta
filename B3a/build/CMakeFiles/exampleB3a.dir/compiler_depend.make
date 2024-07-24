@@ -874,26 +874,59 @@ CMakeFiles/exampleB3a.dir/exampleB3a.cc.o: /home/ilaria/Simulations/simBeta/B3a/
   /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h
 
 CMakeFiles/exampleB3a.dir/src/ActionInitialization.cc.o: /home/ilaria/Simulations/simBeta/B3a/src/ActionInitialization.cc \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/CLHEP/Units/PhysicalConstants.h \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/CLHEP/Units/SystemOfUnits.h \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/CLHEP/Utility/defs.h \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/CLHEP/Vector/ThreeVector.h \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/CLHEP/Vector/ThreeVector.icc \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Accumulable.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Accumulable.icc \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Allocator.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4AllocatorPool.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4AutoLock.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ClassificationOfNewTrack.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4DCofThisEvent.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4EnvironmentUtils.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Event.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Exception.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ExceptionSeverity.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4GlobalConfig.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4HCofThisEvent.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4MergeMode.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4PDefManager.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ParticleDefinition.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ParticleDefinition.icc \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ParticleGun.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ParticleMomentum.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4PrimaryParticle.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4PrimaryVertex.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Profiler.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Profiler.icc \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4String.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4String.icc \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Threading.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ThreeVector.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4TrajectoryContainer.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Types.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4UserEventAction.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4UserRunAction.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4UserStackingAction.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VAccumulable.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VAccumulable.icc \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VDigiCollection.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VHitsCollection.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VPrimaryGenerator.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VTrajectory.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VUserActionInitialization.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VUserEventInformation.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VUserPrimaryGeneratorAction.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ios.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/PTL/Globals.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/PTL/Types.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/PTL/Utility.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/evtdefs.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/globals.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/pwdefs.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/templates.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/tls.hh \
   /home/ilaria/Simulations/simBeta/B3a/include/ActionInitialization.hh \
@@ -906,11 +939,16 @@ CMakeFiles/exampleB3a.dir/src/ActionInitialization.cc.o: /home/ilaria/Simulation
   /usr/include/asm-generic/errno.h \
   /usr/include/c++/13/algorithm \
   /usr/include/c++/13/array \
+  /usr/include/c++/13/atomic \
   /usr/include/c++/13/backward/binders.h \
   /usr/include/c++/13/bit \
   /usr/include/c++/13/bits/algorithmfwd.h \
   /usr/include/c++/13/bits/alloc_traits.h \
+  /usr/include/c++/13/bits/allocated_ptr.h \
   /usr/include/c++/13/bits/allocator.h \
+  /usr/include/c++/13/bits/atomic_base.h \
+  /usr/include/c++/13/bits/atomic_futex.h \
+  /usr/include/c++/13/bits/atomic_lockfree_defines.h \
   /usr/include/c++/13/bits/basic_ios.h \
   /usr/include/c++/13/bits/basic_ios.tcc \
   /usr/include/c++/13/bits/basic_string.h \
@@ -960,11 +998,14 @@ CMakeFiles/exampleB3a.dir/src/ActionInitialization.cc.o: /home/ilaria/Simulation
   /usr/include/c++/13/bits/range_access.h \
   /usr/include/c++/13/bits/refwrap.h \
   /usr/include/c++/13/bits/requires_hosted.h \
+  /usr/include/c++/13/bits/shared_ptr.h \
+  /usr/include/c++/13/bits/shared_ptr_base.h \
   /usr/include/c++/13/bits/specfun.h \
   /usr/include/c++/13/bits/sstream.tcc \
   /usr/include/c++/13/bits/std_abs.h \
   /usr/include/c++/13/bits/std_function.h \
   /usr/include/c++/13/bits/std_mutex.h \
+  /usr/include/c++/13/bits/std_thread.h \
   /usr/include/c++/13/bits/stl_algo.h \
   /usr/include/c++/13/bits/stl_algobase.h \
   /usr/include/c++/13/bits/stl_bvector.h \
@@ -976,8 +1017,10 @@ CMakeFiles/exampleB3a.dir/src/ActionInitialization.cc.o: /home/ilaria/Simulation
   /usr/include/c++/13/bits/stl_iterator_base_types.h \
   /usr/include/c++/13/bits/stl_map.h \
   /usr/include/c++/13/bits/stl_multimap.h \
+  /usr/include/c++/13/bits/stl_multiset.h \
   /usr/include/c++/13/bits/stl_pair.h \
   /usr/include/c++/13/bits/stl_relops.h \
+  /usr/include/c++/13/bits/stl_set.h \
   /usr/include/c++/13/bits/stl_tempbuf.h \
   /usr/include/c++/13/bits/stl_tree.h \
   /usr/include/c++/13/bits/stl_uninitialized.h \
@@ -986,8 +1029,10 @@ CMakeFiles/exampleB3a.dir/src/ActionInitialization.cc.o: /home/ilaria/Simulation
   /usr/include/c++/13/bits/streambuf_iterator.h \
   /usr/include/c++/13/bits/string_view.tcc \
   /usr/include/c++/13/bits/stringfwd.h \
+  /usr/include/c++/13/bits/this_thread_sleep.h \
   /usr/include/c++/13/bits/uniform_int_dist.h \
   /usr/include/c++/13/bits/unique_lock.h \
+  /usr/include/c++/13/bits/unique_ptr.h \
   /usr/include/c++/13/bits/unordered_map.h \
   /usr/include/c++/13/bits/uses_allocator.h \
   /usr/include/c++/13/bits/uses_allocator_args.h \
@@ -995,11 +1040,13 @@ CMakeFiles/exampleB3a.dir/src/ActionInitialization.cc.o: /home/ilaria/Simulation
   /usr/include/c++/13/bits/vector.tcc \
   /usr/include/c++/13/cctype \
   /usr/include/c++/13/cerrno \
+  /usr/include/c++/13/chrono \
   /usr/include/c++/13/climits \
   /usr/include/c++/13/clocale \
   /usr/include/c++/13/cmath \
   /usr/include/c++/13/compare \
   /usr/include/c++/13/complex \
+  /usr/include/c++/13/condition_variable \
   /usr/include/c++/13/cstddef \
   /usr/include/c++/13/cstdint \
   /usr/include/c++/13/cstdio \
@@ -1014,10 +1061,12 @@ CMakeFiles/exampleB3a.dir/src/ActionInitialization.cc.o: /home/ilaria/Simulation
   /usr/include/c++/13/ext/aligned_buffer.h \
   /usr/include/c++/13/ext/alloc_traits.h \
   /usr/include/c++/13/ext/atomicity.h \
+  /usr/include/c++/13/ext/concurrence.h \
   /usr/include/c++/13/ext/numeric_traits.h \
   /usr/include/c++/13/ext/string_conversions.h \
   /usr/include/c++/13/ext/type_traits.h \
   /usr/include/c++/13/functional \
+  /usr/include/c++/13/future \
   /usr/include/c++/13/initializer_list \
   /usr/include/c++/13/iomanip \
   /usr/include/c++/13/ios \
@@ -1034,12 +1083,15 @@ CMakeFiles/exampleB3a.dir/src/ActionInitialization.cc.o: /home/ilaria/Simulation
   /usr/include/c++/13/pstl/glue_algorithm_defs.h \
   /usr/include/c++/13/pstl/pstl_config.h \
   /usr/include/c++/13/ratio \
+  /usr/include/c++/13/set \
   /usr/include/c++/13/sstream \
   /usr/include/c++/13/stdexcept \
+  /usr/include/c++/13/stdlib.h \
   /usr/include/c++/13/streambuf \
   /usr/include/c++/13/string \
   /usr/include/c++/13/string_view \
   /usr/include/c++/13/system_error \
+  /usr/include/c++/13/thread \
   /usr/include/c++/13/tr1/bessel_function.tcc \
   /usr/include/c++/13/tr1/beta_function.tcc \
   /usr/include/c++/13/tr1/ell_integral.tcc \
@@ -3811,10 +3863,13 @@ CMakeFiles/exampleB3a.dir/src/PrimaryGeneratorAction.cc.o: /home/ilaria/Simulati
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4AllocatorPool.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4AutoLock.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ChargedGeantino.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4DCofThisEvent.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4EnvironmentUtils.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Event.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Exception.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ExceptionSeverity.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4GlobalConfig.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4HCofThisEvent.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4IonTable.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Ions.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4PDefManager.hh \
@@ -3827,16 +3882,29 @@ CMakeFiles/exampleB3a.dir/src/PrimaryGeneratorAction.cc.o: /home/ilaria/Simulati
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ParticleTableIterator.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4PrimaryParticle.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4PrimaryVertex.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Profiler.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Profiler.icc \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4String.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4String.icc \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4SystemOfUnits.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Threading.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ThreeVector.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4TrajectoryContainer.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Types.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4UnitsTable.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4UnitsTable.icc \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VDigiCollection.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VHitsCollection.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VPrimaryGenerator.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VTrajectory.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VUserEventInformation.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4VUserPrimaryGeneratorAction.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4ios.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/PTL/Globals.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/PTL/Types.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/PTL/Utility.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/Randomize.hh \
+  /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/evtdefs.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/globals.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/pwdefs.hh \
   /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/templates.hh \
@@ -3871,6 +3939,7 @@ CMakeFiles/exampleB3a.dir/src/PrimaryGeneratorAction.cc.o: /home/ilaria/Simulati
   /usr/include/c++/13/bits/cpp_type_traits.h \
   /usr/include/c++/13/bits/cxxabi_forced.h \
   /usr/include/c++/13/bits/cxxabi_init_exception.h \
+  /usr/include/c++/13/bits/enable_special_members.h \
   /usr/include/c++/13/bits/erase_if.h \
   /usr/include/c++/13/bits/exception.h \
   /usr/include/c++/13/bits/exception_defines.h \
@@ -3879,6 +3948,8 @@ CMakeFiles/exampleB3a.dir/src/PrimaryGeneratorAction.cc.o: /home/ilaria/Simulati
   /usr/include/c++/13/bits/functexcept.h \
   /usr/include/c++/13/bits/functional_hash.h \
   /usr/include/c++/13/bits/hash_bytes.h \
+  /usr/include/c++/13/bits/hashtable.h \
+  /usr/include/c++/13/bits/hashtable_policy.h \
   /usr/include/c++/13/bits/invoke.h \
   /usr/include/c++/13/bits/ios_base.h \
   /usr/include/c++/13/bits/istream.tcc \
@@ -3926,8 +3997,11 @@ CMakeFiles/exampleB3a.dir/src/PrimaryGeneratorAction.cc.o: /home/ilaria/Simulati
   /usr/include/c++/13/bits/stl_iterator_base_types.h \
   /usr/include/c++/13/bits/stl_map.h \
   /usr/include/c++/13/bits/stl_multimap.h \
+  /usr/include/c++/13/bits/stl_multiset.h \
   /usr/include/c++/13/bits/stl_pair.h \
   /usr/include/c++/13/bits/stl_raw_storage_iter.h \
+  /usr/include/c++/13/bits/stl_relops.h \
+  /usr/include/c++/13/bits/stl_set.h \
   /usr/include/c++/13/bits/stl_tempbuf.h \
   /usr/include/c++/13/bits/stl_tree.h \
   /usr/include/c++/13/bits/stl_uninitialized.h \
@@ -3940,6 +4014,7 @@ CMakeFiles/exampleB3a.dir/src/PrimaryGeneratorAction.cc.o: /home/ilaria/Simulati
   /usr/include/c++/13/bits/uniform_int_dist.h \
   /usr/include/c++/13/bits/unique_lock.h \
   /usr/include/c++/13/bits/unique_ptr.h \
+  /usr/include/c++/13/bits/unordered_map.h \
   /usr/include/c++/13/bits/uses_allocator.h \
   /usr/include/c++/13/bits/uses_allocator_args.h \
   /usr/include/c++/13/bits/utility.h \
@@ -3972,6 +4047,7 @@ CMakeFiles/exampleB3a.dir/src/PrimaryGeneratorAction.cc.o: /home/ilaria/Simulati
   /usr/include/c++/13/ext/string_conversions.h \
   /usr/include/c++/13/ext/type_traits.h \
   /usr/include/c++/13/fstream \
+  /usr/include/c++/13/functional \
   /usr/include/c++/13/future \
   /usr/include/c++/13/initializer_list \
   /usr/include/c++/13/iomanip \
@@ -3991,6 +4067,7 @@ CMakeFiles/exampleB3a.dir/src/PrimaryGeneratorAction.cc.o: /home/ilaria/Simulati
   /usr/include/c++/13/pstl/glue_memory_defs.h \
   /usr/include/c++/13/pstl/pstl_config.h \
   /usr/include/c++/13/ratio \
+  /usr/include/c++/13/set \
   /usr/include/c++/13/sstream \
   /usr/include/c++/13/stdexcept \
   /usr/include/c++/13/stdlib.h \
@@ -4014,6 +4091,8 @@ CMakeFiles/exampleB3a.dir/src/PrimaryGeneratorAction.cc.o: /home/ilaria/Simulati
   /usr/include/c++/13/tuple \
   /usr/include/c++/13/type_traits \
   /usr/include/c++/13/typeinfo \
+  /usr/include/c++/13/unordered_map \
+  /usr/include/c++/13/utility \
   /usr/include/c++/13/vector \
   /usr/include/ctype.h \
   /usr/include/endian.h \
@@ -5147,13 +5226,13 @@ CMakeFiles/exampleB3a.dir/src/StackingAction.cc.o: /home/ilaria/Simulations/simB
   /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h
 
 
-/home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4UnitsTable.icc:
-
 /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4AccumulableManager.icc:
 
 /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4AccumulableManager.hh:
 
 /home/ilaria/Simulations/simBeta/B3a/src/RunAction.cc:
+
+/home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4UnitsTable.icc:
 
 /home/ilaria/Installed/geant4/geant4-v11.2.2-install/include/Geant4/G4Ions.hh:
 
