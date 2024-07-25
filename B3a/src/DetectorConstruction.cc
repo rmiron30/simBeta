@@ -96,7 +96,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   //
   G4double cryst_dX = 6 * cm, cryst_dY = 6 * cm, cryst_dZ = 3 * cm;
   G4int nb_cryst = 32;
-  G4int nb_rings = 1;
+  G4int nb_rings = 0;
   //
   G4double dPhi = twopi / nb_cryst, half_dPhi = 0.5 * dPhi;
   G4double cosdPhi = std::cos(half_dPhi);
@@ -254,7 +254,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   logicDetector->SetVisAttributes(G4VisAttributes::GetInvisible());
 
   // Print materials
-  G4cout << *(G4Material::GetMaterialTable()) << G4endl;
+  // G4cout << *(G4Material::GetMaterialTable()) << G4endl;
 
   // always return the physical World
   //
@@ -265,15 +265,15 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
 void DetectorConstruction::ConstructSDandField()
 {
-  G4SDManager::GetSDMpointer()->SetVerboseLevel(1);
+  // G4SDManager::GetSDMpointer()->SetVerboseLevel(1);
 
-  // declare crystal as a MultiFunctionalDetector scorer
-  //
-  auto cryst = new G4MultiFunctionalDetector("crystal");
-  G4SDManager::GetSDMpointer()->AddNewDetector(cryst);
-  G4VPrimitiveScorer* primitiv1 = new G4PSEnergyDeposit("edep");
-  cryst->RegisterPrimitive(primitiv1);
-  SetSensitiveDetector("CrystalLV", cryst);
+  // // declare crystal as a MultiFunctionalDetector scorer
+  // //
+  // auto cryst = new G4MultiFunctionalDetector("crystal");
+  // G4SDManager::GetSDMpointer()->AddNewDetector(cryst);
+  // G4VPrimitiveScorer* primitiv1 = new G4PSEnergyDeposit("edep");
+  // cryst->RegisterPrimitive(primitiv1);
+  // SetSensitiveDetector("CrystalLV", cryst);
 }
 
 

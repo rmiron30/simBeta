@@ -57,7 +57,7 @@ class EventAction : public G4UserEventAction
     RunAction* fRunAction = nullptr;
     G4int fCollID_betaFront = -1;
     G4int fCollID_betaBack = -1;
-    G4int fCollID_cryst = -1;
+    // G4int fCollID_cryst = -1;
     G4int fCollID_patient = -1;
 };
 

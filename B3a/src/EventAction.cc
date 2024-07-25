@@ -59,27 +59,27 @@ void EventAction::EndOfEventAction(const G4Event* evt)
   if (!HCE) return;
 
   // Get hits collections IDs
-  if (fCollID_cryst < 0) {
+  if (fCollID_betaBack < 0) {
     G4SDManager* SDMan = G4SDManager::GetSDMpointer();
     fCollID_betaFront = SDMan->GetCollectionID("betaFront/eDep");
     fCollID_betaBack = SDMan->GetCollectionID("betaBack/eDep");
-    fCollID_cryst = SDMan->GetCollectionID("crystal/edep");
+    // fCollID_cryst = SDMan->GetCollectionID("crystal/edep");
   }
 
   // Energy in crystals : identify 'good events'
   //
-  const G4double eThreshold = 500 * keV;
-  G4int nbOfFired = 0;
+  // const G4double eThreshold = 500 * keV;
+  // G4int nbOfFired = 0;
 
-  auto evtMap = static_cast<G4THitsMap<G4double>*>(HCE->GetHC(fCollID_cryst));
+  // auto evtMap = static_cast<G4THitsMap<G4double>*>(HCE->GetHC(fCollID_cryst));
 
-  for (auto& mapElement : (*evtMap->GetMap())) {
-    auto edep = *(mapElement.second);
-    if (edep > eThreshold) ++nbOfFired;
-    // auto copyNb  = mapElement.first;
-    // G4cout << "\n  cryst" << copyNb << ": " << edep/keV << " keV ";
-  }
-  if (nbOfFired == 2) fRunAction->CountEvent();
+  // for (auto& mapElement : (*evtMap->GetMap())) {
+  //   auto edep = *(mapElement.second);
+  //   if (edep > eThreshold) ++nbOfFired;
+  //   // auto copyNb  = mapElement.first;
+  //   // G4cout << "\n  cryst" << copyNb << ": " << edep/keV << " keV ";
+  // }
+  // if (nbOfFired == 2) fRunAction->CountEvent();
 
   // Energy in betaFront
 
@@ -91,8 +91,8 @@ void EventAction::EndOfEventAction(const G4Event* evt)
 	{
 		energyDeposit = *((*eventMap2)[0]);	    
 	}
-	if(eventMap2->entries() !=0)
-		std::cout << "!!!" << "front" << " " << fCollID_betaFront << " " << energyDeposit/keV << " " << eventMap2->entries() << std::endl;
+	// if(eventMap2->entries() !=0)
+	// 	std::cout << "!!!" << "front" << " " << fCollID_betaFront << " " << energyDeposit/keV << " " << eventMap2->entries() << std::endl;
 
   // // Energy in betaBAck
 
