@@ -37,6 +37,8 @@
 #include "G4RunManager.hh"
 #include "G4SystemOfUnits.hh"
 #include "G4UnitsTable.hh"
+#include <filesystem>
+#include "G4AnalysisManager.hh"
 
 using namespace B3;
 
@@ -63,6 +65,9 @@ RunAction::RunAction()
   G4AccumulableManager* accumulableManager = G4AccumulableManager::Instance();
   accumulableManager->RegisterAccumulable(fGoodEvents);
   accumulableManager->RegisterAccumulable(fSumDose);
+
+  G4AnalysisManager *analysisManager = G4AnalysisManager::Instance();
+  // analysisManager->CreateH2("eDep2D","Energy Deposition", 1000, -10 * cm, 10 * cm, 1000, -10 * cm, 10 * cm); // 2D energy deposition
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -90,6 +95,8 @@ void RunAction::EndOfRunAction(const G4Run* run)
   G4AccumulableManager* accumulableManager = G4AccumulableManager::Instance();
   accumulableManager->Merge();
 
+  // G4AnalysisManager *analysisManager = G4AnalysisManager::Instance();
+
   // Run conditions
   //  note: There is no primary generator action object for "master"
   //        run manager for multi-threaded mode.
@@ -101,9 +108,24 @@ void RunAction::EndOfRunAction(const G4Run* run)
     partName = particle->GetParticleName();
   }
 
+  // char timeDir[80];
+
   // Print results
   //
   if (IsMaster()) {
+
+    // G4Random::showEngineStatus();
+
+    // // the current time
+
+    // std::time_t t = std::time(nullptr);
+
+    // std::strftime(timeDir, 80, "simBeta-%Y-%m-%d-%H-%M-%S", std::localtime(&t));
+
+    // // save files
+
+    // std::filesystem::create_directory(timeDir);
+
     G4cout << G4endl << "--------------------End of Global Run-----------------------" << G4endl
            << "  The run was " << nofEvents << " events ";
   }
@@ -114,6 +136,14 @@ void RunAction::EndOfRunAction(const G4Run* run)
   G4cout << "; Nb of 'good' e+ annihilations: " << fGoodEvents.GetValue() << G4endl
          << " Total dose in patient : " << G4BestUnit(fSumDose.GetValue(), "Dose") << G4endl
          << "------------------------------------------------------------" << G4endl << G4endl;
+
+  // analysisManager->Write();
+  // analysisManager->CloseFile();
+
+  // if (IsMaster()){
+  //     const auto copyOptions = std::filesystem::copy_options::overwrite_existing | std::filesystem::copy_options::recursive;
+  //     std::filesystem::copy("scoring.root", timeDir + std::string("/scoring.root"), copyOptions);
+  //     std::filesystem::copy("exampleB3.in", timeDir + std::string("/exampleB3.in"), copyOptions);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

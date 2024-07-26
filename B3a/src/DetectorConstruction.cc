@@ -219,34 +219,34 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   //
   // implanter crystal, thin disk, 2 mm thickness
   //
-  // G4double sample_radius = 2 * cm;
-  // G4double sample_dZ = 1 * mm;
-  // G4double density;
-	// G4int numberElements;  
-  // G4NistManager* man=G4NistManager::Instance();
-	// G4Element* K = man->FindOrBuildElement (19);
-	// G4Element* Cl = man->FindOrBuildElement(17);
-	// G4Material*	KCl = new G4Material( "KCl", density= 1.98 *g/cm3, numberElements=2 );
-	// KCl->AddElement( K,  1 );
-	// KCl->AddElement( Cl,  1);
+  G4double sample_radius = 2 * cm;
+  G4double sample_dZ = 1 * mm;
+  G4double density;
+	G4int numberElements;  
+  G4NistManager* man=G4NistManager::Instance();
+	G4Element* K = man->FindOrBuildElement (19);
+	G4Element* Cl = man->FindOrBuildElement(17);
+	G4Material*	KCl = new G4Material( "KCl", density= 1.98 *g/cm3, numberElements=2 );
+	KCl->AddElement( K,  1 );
+	KCl->AddElement( Cl,  1);
 
-  // auto solidsample = new G4Tubs("sample", 0., sample_radius, 0.5 * sample_dZ, 0., twopi);
+  auto solidsample = new G4Tubs("sample", 0., sample_radius, 0.5 * sample_dZ, 0., twopi);
 
-  // auto logicsample = new G4LogicalVolume(solidsample,  // its solid
-  //                                         KCl,  // its material
-  //                                         "sampleLV");  // its name
+  auto logicsample = new G4LogicalVolume(solidsample,  // its solid
+                                          KCl,  // its material
+                                          "sampleLV");  // its name
 
   
-  // // place sample in world
+  // place sample in world
   
-  // new G4PVPlacement(nullptr,  // no rotation
-  //                   G4ThreeVector(),  // at (0,0,0)
-  //                   logicsample,  // its logical volume
-  //                   "sample",  // its name
-  //                   logicWorld,  // its mother  volume
-  //                   false,  // no boolean operation
-  //                   0,  // copy number
-  //                   fCheckOverlaps);  // checking overlaps
+  new G4PVPlacement(nullptr,  // no rotation
+                    G4ThreeVector(),  // at (0,0,0)
+                    logicsample,  // its logical volume
+                    "sample",  // its name
+                    logicWorld,  // its mother  volume
+                    false,  // no boolean operation
+                    0,  // copy number
+                    fCheckOverlaps);  // checking overlaps
 
   // Visualization attributes
   //
@@ -265,15 +265,15 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
 void DetectorConstruction::ConstructSDandField()
 {
-  // G4SDManager::GetSDMpointer()->SetVerboseLevel(1);
+  G4SDManager::GetSDMpointer()->SetVerboseLevel(1);
 
-  // // declare crystal as a MultiFunctionalDetector scorer
-  // //
-  // auto cryst = new G4MultiFunctionalDetector("crystal");
-  // G4SDManager::GetSDMpointer()->AddNewDetector(cryst);
-  // G4VPrimitiveScorer* primitiv1 = new G4PSEnergyDeposit("edep");
-  // cryst->RegisterPrimitive(primitiv1);
-  // SetSensitiveDetector("CrystalLV", cryst);
+  // declare crystal as a MultiFunctionalDetector scorer
+  //
+  auto sample = new G4MultiFunctionalDetector("sample");
+  G4SDManager::GetSDMpointer()->AddNewDetector(sample);
+  G4VPrimitiveScorer* primitiv1 = new G4PSEnergyDeposit("eDep");
+  sample->RegisterPrimitive(primitiv1);
+  SetSensitiveDetector("sampleLV", sample);
 }
 
 

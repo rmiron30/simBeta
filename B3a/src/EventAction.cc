@@ -36,6 +36,7 @@
 #include "G4SDManager.hh"
 #include "G4SystemOfUnits.hh"
 #include "G4THitsMap.hh"
+#include "G4AnalysisManager.hh"
 // #include "G4UnitsTable.hh"
 
 namespace B3a
@@ -63,33 +64,34 @@ void EventAction::EndOfEventAction(const G4Event* evt)
     G4SDManager* SDMan = G4SDManager::GetSDMpointer();
     fCollID_betaFront = SDMan->GetCollectionID("betaFront/eDep");
     fCollID_betaBack = SDMan->GetCollectionID("betaBack/eDep");
+    fCollID_sample = SDMan->GetCollectionID("sample/eDep");
     // fCollID_cryst = SDMan->GetCollectionID("crystal/edep");
   }
 
   // Energy in crystals : identify 'good events'
   //
   // const G4double eThreshold = 500 * keV;
-  // G4int nbOfFired = 0;
+  G4int nbOfFired = 0;
 
-  // auto evtMap = static_cast<G4THitsMap<G4double>*>(HCE->GetHC(fCollID_cryst));
+  auto evtMap = static_cast<G4THitsMap<G4double>*>(HCE->GetHC(fCollID_sample));
 
   // for (auto& mapElement : (*evtMap->GetMap())) {
   //   auto edep = *(mapElement.second);
-  //   if (edep > eThreshold) ++nbOfFired;
-  //   // auto copyNb  = mapElement.first;
-  //   // G4cout << "\n  cryst" << copyNb << ": " << edep/keV << " keV ";
+  //   if (edep > 0) 
+  //     energyDeposit = *((*eventMap2)[0]);	 
   // }
   // if (nbOfFired == 2) fRunAction->CountEvent();
 
   // Energy in betaFront
 
     G4THitsMap<G4double>* eventMap2 = (G4THitsMap<G4double>*)(HCE->GetHC(fCollID_betaFront));
+    // G4AnalysisManager *analysisManager = G4AnalysisManager::Instance();
 
     double energyDeposit = 0;
 
   if((*eventMap2)[0] != 0)
 	{
-		energyDeposit = *((*eventMap2)[0]);	    
+		energyDeposit = *((*eventMap2)[0]);	 
 	}
 	// if(eventMap2->entries() !=0)
 	// 	std::cout << "!!!" << "front" << " " << fCollID_betaFront << " " << energyDeposit/keV << " " << eventMap2->entries() << std::endl;

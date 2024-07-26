@@ -6,6 +6,8 @@
 /control/verbose 2
 #
 #/score/ntuple/writerFileName scoring3
+#/gun/particle ion
+#/gun/ion 19 47
 /run/printProgress 1000
 /run/beamOn 10000
 

@@ -31,6 +31,7 @@
 #define B3aEventAction_h 1
 
 #include "G4UserEventAction.hh"
+#include "G4UserSteppingAction.hh"
 #include "globals.hh"
 
 namespace B3a
@@ -57,8 +58,7 @@ class EventAction : public G4UserEventAction
     RunAction* fRunAction = nullptr;
     G4int fCollID_betaFront = -1;
     G4int fCollID_betaBack = -1;
-    // G4int fCollID_cryst = -1;
-    G4int fCollID_patient = -1;
+    G4int fCollID_sample = -1;
 };
 
 }  // namespace B3a

@@ -107,7 +107,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* event)
   G4ParticleDefinition* particle = fParticleGun->GetParticleDefinition();
   if (particle == G4ChargedGeantino::ChargedGeantino()) {
     // fluorine
-    G4int Z = 9, A = 18;
+    G4int Z = 19, A = 47;
     G4double ionCharge = 0. * eplus;
     G4double excitEnergy = 0. * keV;
 
@@ -117,11 +117,14 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* event)
   }
 
   // randomized position
+  // the beta source should be located on the surface of the sample
+  // isotropic emission
+  // the plane where the source is located is defined by x and y coordinates
   //
-  G4double x0  = 0*cm, y0  = 0*cm, z0  = 0*cm;
+  G4double x0  = 0*cm, y0  = 0*cm, z0  = 0.5*mm;
   // G4double dx0 = 0*cm, dy0 = 0*cm, dz0 = 0*cm;
   // G4double x0 = 2 * cm, y0 = 2 * cm, z0 = 2 * cm;
-  G4double dx0 = 1 * cm, dy0 = 1 * cm, dz0 = 1 * cm;
+  G4double dx0 = 0.5 * cm, dy0 = 0.5 * cm, dz0 = 0.5 * cm;
   x0 += dx0 * (G4UniformRand() - 0.5);
   y0 += dy0 * (G4UniformRand() - 0.5);
   // z0 += dz0 * (G4UniformRand() - 0.5);
