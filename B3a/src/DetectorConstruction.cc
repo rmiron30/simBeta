@@ -70,16 +70,6 @@ void DetectorConstruction::DefineMaterials()
   G4NistManager* man = G4NistManager::Instance();
 
   G4bool isotopes = false;
-
-  // G4Element* O = man->FindOrBuildElement("O", isotopes);
-  // G4Element* Si = man->FindOrBuildElement("Si", isotopes);
-  // G4Element* Lu = man->FindOrBuildElement("Lu", isotopes);
-
-  // auto LSO = new G4Material("Lu2SiO5", 7.4 * g / cm3, 3);
-  // LSO->AddElement(Lu, 2);
-  // LSO->AddElement(Si, 1);
-  // LSO->AddElement(O, 5);
-
 	G4double atomicMass;
 	G4double z;
 	G4double density;
@@ -88,9 +78,9 @@ void DetectorConstruction::DefineMaterials()
 
 	G4Element* H  = new G4Element("Hydrogen", "H",  z=1.,  atomicMass =1.008 *g/mole );
 	G4Element* C  = new G4Element("Carbon",   "C",  z=6.,  atomicMass = 12.01*g/mole );
-	G4Material*	ej200 = new G4Material( "ej200", density= 1.023 *g/cm3, numberElements=2 );
-	ej200->AddElement( C,  469 );
-	ej200->AddElement( H,  517);	
+// 	G4Material*	ej200 = new G4Material( "ej200", density= 1.023 *g/cm3, numberElements=2 );
+// 	ej200->AddElement( C,  469 );
+// 	ej200->AddElement( H,  517);	
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -101,48 +91,63 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     // G4VPhysicalVolume* worldPhys = ConstructWorld();
   G4String prefix = "/home/ilaria/Simulations/isolde_geant4_elements/Main-elements/";
   G4ThreeVector pos(0,0,0);
-
   BetaDet* betaDet = new BetaDet(prefix);
 
   // Define new Beta detectors with the good geometry
 
-  G4double betaside = 50 * mm;
-  G4double cornerside = 10 * mm;
-  G4double beta_dz = 6 * mm;
-  G4double corner_dz = 8 * mm;
-  G4double diameter = 10 * mm;
+  G4double betaside = 50 * mm, cornerside = 10 * mm, beta_dz = 6 * mm, corner_dz = 8 * mm, diameter = 10 * mm;
   G4double angle = twopi/8;
 
-  G4double atomicMass;
-	G4double z;
-	G4double density;
+  G4double atomicMass, z, density;
 	G4int numberElements;
   
-
 	G4Element* H  = new G4Element("Hydrogen", "H",  z=1.,  atomicMass =1.008 *g/mole );
 	G4Element* C  = new G4Element("Carbon",   "C",  z=6.,  atomicMass = 12.01*g/mole );
 	G4Material*	ej200 = new G4Material( "ej200", density= 1.023 *g/cm3, numberElements=2 );
 	ej200->AddElement( C,  469 );
 	ej200->AddElement( H,  517);	
 
-  auto solidBeta =
-    new G4Box("betaFront",  // its name
-              0.5 * betaside, 0.5 * betaside, 0.5 * beta_dz);  // its size
+  auto solidBetaF = new G4Box("betaFront", 0.5 * betaside, 0.5 * betaside, 0.5 * beta_dz); 
+  auto hole = new G4Tubs("hole", 0, 0.5 * diameter, corner_dz,0, twopi);
+  auto corner = new G4Box("corner1", 0.5*cornerside, 0.5*cornerside, 0.5*corner_dz);
+  G4SubtractionSolid* volume1 = new G4SubtractionSolid("volume1", solidBetaF, hole);
 
-  
+  G4RotationMatrix *rotm1 = new G4RotationMatrix();
+  rotm1->rotateZ(45.*deg);
+  G4RotationMatrix *rotm2 = new G4RotationMatrix();
+  rotm2->rotateZ(135.*deg);
+  G4RotationMatrix *rotm3 = new G4RotationMatrix();
+  rotm3->rotateZ(225.*deg);
+  G4RotationMatrix *rotm4 = new G4RotationMatrix();
+  rotm4->rotateZ(315.*deg);
 
-  auto solidCorner = new G4Box("corner1", 0.5*cornerside, 0.5*cornerside, 0.5 * corner_dz);
-  G4SubtractionSolid* volume1 = new G4SubtractionSolid("volume1", solidBeta, solidCorner);
+  G4SubtractionSolid* volume2 = new G4SubtractionSolid("volume2", volume1, corner, rotm1, G4ThreeVector(25,25,0));
+  G4SubtractionSolid* volume3 = new G4SubtractionSolid("volume3", volume2, corner, rotm2, G4ThreeVector(-25,25,0));
+  G4SubtractionSolid* volume4 = new G4SubtractionSolid("volume4", volume3, corner, rotm3, G4ThreeVector(-25,-25,0));
+  G4SubtractionSolid* volume5 = new G4SubtractionSolid("volume5", volume4, corner, rotm4, G4ThreeVector(25,-25,0));
+
+  auto solidBetaB = new G4Box("betaBack", 0.5 * betaside, 0.5 * betaside, 0.5 * beta_dz); 
+  G4SubtractionSolid* volume6 = new G4SubtractionSolid("volume6", solidBetaB, hole);
+  G4SubtractionSolid* volume7 = new G4SubtractionSolid("volume7", volume6, corner, rotm1, G4ThreeVector(25,25,0));
+  G4SubtractionSolid* volume8 = new G4SubtractionSolid("volume8", volume7, corner, rotm2, G4ThreeVector(-25,25,0));
+  G4SubtractionSolid* volume9 = new G4SubtractionSolid("volume9", volume8, corner, rotm3, G4ThreeVector(-25,-25,0));
+  G4SubtractionSolid* volume10 = new G4SubtractionSolid("volume10", volume9, corner, rotm4, G4ThreeVector(25,-25,0));
 
   G4VisAttributes* BetaDetVis = new G4VisAttributes( G4Colour(0.8,0.2,0.0));
   BetaDetVis->SetForceAuxEdgeVisible(true);
   BetaDetVis->SetForceSolid(true);
 
-  auto logicBeta = new G4LogicalVolume(volume1,  // its solid
+  auto logicBetaF = new G4LogicalVolume(volume5,  // its solid
                                            ej200,  // its material
                                            "betaFront");  // its name
 
-  logicBeta->SetVisAttributes(BetaDetVis);
+  logicBetaF->SetVisAttributes(BetaDetVis);
+
+  auto logicBetaB = new G4LogicalVolume(volume10,  // its solid
+                                           ej200,  // its material
+                                           "betaBack");  // its name
+
+  logicBetaB->SetVisAttributes(BetaDetVis);
   
 
 
@@ -192,7 +197,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
                                      0,  // copy number
                                      fCheckOverlaps);  // checking overlaps
 
-  betaDet->Place(0, pos, "BetaDet", logicWorld);
+  // betaDet->Place(0, pos, "BetaDet", logicWorld);
       
   betaDet->MakeSensitiveDet();
 
@@ -293,13 +298,27 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
                                           KCl,  // its material
                                           "sampleLV");  // its name
 
+  G4VisAttributes* sampleVis = new G4VisAttributes( G4Colour(0.0,0.8,0.2));
+  sampleVis->SetForceAuxEdgeVisible(true);
+  sampleVis->SetForceSolid(true);
+  logicsample->SetVisAttributes(sampleVis);
+
 
   // place new beta in world
 
   new G4PVPlacement(nullptr,  // no rotation
-                    G4ThreeVector(0,0,50),  // at (0,0,0)
-                    logicBeta,  // its logical volume
+                    G4ThreeVector(0,0,25),  // at (0,0,0)
+                    logicBetaF,  // its logical volume
                     "betaFront",  // its name
+                    logicWorld,  // its mother  volume
+                    false,  // no boolean operation
+                    0,  // copy number
+                    fCheckOverlaps);  // checking overlaps
+
+  new G4PVPlacement(nullptr,  // no rotation
+                    G4ThreeVector(0,0,-25),  // at (0,0,0)
+                    logicBetaB,  // its logical volume
+                    "betaBack",  // its name
                     logicWorld,  // its mother  volume
                     false,  // no boolean operation
                     0,  // copy number

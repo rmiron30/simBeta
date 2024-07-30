@@ -121,12 +121,12 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* event)
   // isotropic emission
   // the plane where the source is located is defined by x and y coordinates
   //
-  G4double x0  = 0*cm, y0  = 0*cm, z0  = 0.5*mm;
+  G4double x0  = 0*cm, y0  = 0*cm, z0  = - 0.5 * 2 * mm; // the minus - front det is the one on the right, so the source is on the right side of the crystal
   // G4double dx0 = 0*cm, dy0 = 0*cm, dz0 = 0*cm;
   // G4double x0 = 2 * cm, y0 = 2 * cm, z0 = 2 * cm;
-  G4double dx0 = 0.5 * cm, dy0 = 0.5 * cm, dz0 = 0.5 * cm;
-  x0 += dx0 * (G4UniformRand() - 0.5);
-  y0 += dy0 * (G4UniformRand() - 0.5);
+  // G4double dx0 = 0.5 * cm, dy0 = 0.5 * cm, dz0 = 0.5 * cm;
+  // x0 += dx0 * (G4UniformRand() - 0.5);
+  // y0 += dy0 * (G4UniformRand() - 0.5);
   // z0 += dz0 * (G4UniformRand() - 0.5);
   fParticleGun->SetParticlePosition(G4ThreeVector(x0, y0, z0));
   G4ThreeVector direction = GenerateIsotropicDirection();
