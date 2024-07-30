@@ -51,6 +51,7 @@
 #include "globals.hh"
 #include "CADMesh.hh"
 #include "BetaDet.hh"
+#include "G4SubtractionSolid.hh"
 
 namespace B3
 {
@@ -70,14 +71,26 @@ void DetectorConstruction::DefineMaterials()
 
   G4bool isotopes = false;
 
-  G4Element* O = man->FindOrBuildElement("O", isotopes);
-  G4Element* Si = man->FindOrBuildElement("Si", isotopes);
-  G4Element* Lu = man->FindOrBuildElement("Lu", isotopes);
+  // G4Element* O = man->FindOrBuildElement("O", isotopes);
+  // G4Element* Si = man->FindOrBuildElement("Si", isotopes);
+  // G4Element* Lu = man->FindOrBuildElement("Lu", isotopes);
 
-  auto LSO = new G4Material("Lu2SiO5", 7.4 * g / cm3, 3);
-  LSO->AddElement(Lu, 2);
-  LSO->AddElement(Si, 1);
-  LSO->AddElement(O, 5);
+  // auto LSO = new G4Material("Lu2SiO5", 7.4 * g / cm3, 3);
+  // LSO->AddElement(Lu, 2);
+  // LSO->AddElement(Si, 1);
+  // LSO->AddElement(O, 5);
+
+	G4double atomicMass;
+	G4double z;
+	G4double density;
+	G4int numberElements;
+  
+
+	G4Element* H  = new G4Element("Hydrogen", "H",  z=1.,  atomicMass =1.008 *g/mole );
+	G4Element* C  = new G4Element("Carbon",   "C",  z=6.,  atomicMass = 12.01*g/mole );
+	G4Material*	ej200 = new G4Material( "ej200", density= 1.023 *g/cm3, numberElements=2 );
+	ej200->AddElement( C,  469 );
+	ej200->AddElement( H,  517);	
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -91,32 +104,76 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   BetaDet* betaDet = new BetaDet(prefix);
 
+  // Define new Beta detectors with the good geometry
+
+  G4double betaside = 50 * mm;
+  G4double cornerside = 10 * mm;
+  G4double beta_dz = 6 * mm;
+  G4double corner_dz = 8 * mm;
+  G4double diameter = 10 * mm;
+  G4double angle = twopi/8;
+
+  G4double atomicMass;
+	G4double z;
+	G4double density;
+	G4int numberElements;
+  
+
+	G4Element* H  = new G4Element("Hydrogen", "H",  z=1.,  atomicMass =1.008 *g/mole );
+	G4Element* C  = new G4Element("Carbon",   "C",  z=6.,  atomicMass = 12.01*g/mole );
+	G4Material*	ej200 = new G4Material( "ej200", density= 1.023 *g/cm3, numberElements=2 );
+	ej200->AddElement( C,  469 );
+	ej200->AddElement( H,  517);	
+
+  auto solidBeta =
+    new G4Box("betaFront",  // its name
+              0.5 * betaside, 0.5 * betaside, 0.5 * beta_dz);  // its size
+
+  
+
+  auto solidCorner = new G4Box("corner1", 0.5*cornerside, 0.5*cornerside, 0.5 * corner_dz);
+  G4SubtractionSolid* volume1 = new G4SubtractionSolid("volume1", solidBeta, solidCorner);
+
+  G4VisAttributes* BetaDetVis = new G4VisAttributes( G4Colour(0.8,0.2,0.0));
+  BetaDetVis->SetForceAuxEdgeVisible(true);
+  BetaDetVis->SetForceSolid(true);
+
+  auto logicBeta = new G4LogicalVolume(volume1,  // its solid
+                                           ej200,  // its material
+                                           "betaFront");  // its name
+
+  logicBeta->SetVisAttributes(BetaDetVis);
+  
+
 
   // Gamma detector Parameters
   //
-  G4double cryst_dX = 6 * cm, cryst_dY = 6 * cm, cryst_dZ = 3 * cm;
-  G4int nb_cryst = 32;
-  G4int nb_rings = 0;
-  //
-  G4double dPhi = twopi / nb_cryst, half_dPhi = 0.5 * dPhi;
-  G4double cosdPhi = std::cos(half_dPhi);
-  G4double tandPhi = std::tan(half_dPhi);
-  //
-  G4double ring_R1 = 0.5 * cryst_dY / tandPhi;
-  G4double ring_R2 = (ring_R1 + cryst_dZ) / cosdPhi;
-  //
-  // G4double detector_dZ = nb_rings * cryst_dX;
-  G4double detector_dZ = 9 * cryst_dX;
-  //
+  // G4double cryst_dX = 6 * cm, cryst_dY = 6 * cm, cryst_dZ = 3 * cm;
+  // G4int nb_cryst = 32;
+  // G4int nb_rings = 0;
+  // //
+  // G4double dPhi = twopi / nb_cryst, half_dPhi = 0.5 * dPhi;
+  // G4double cosdPhi = std::cos(half_dPhi);
+  // G4double tandPhi = std::tan(half_dPhi);
+  // //
+  // G4double ring_R1 = 0.5 * cryst_dY / tandPhi;
+  // G4double ring_R2 = (ring_R1 + cryst_dZ) / cosdPhi;
+  // //
+  // // G4double detector_dZ = nb_rings * cryst_dX;
+  // G4double detector_dZ = 9 * cryst_dX;
+  // //
   G4NistManager* nist = G4NistManager::Instance();
   G4Material* default_mat = nist->FindOrBuildMaterial("G4_AIR");
-  G4Material* cryst_mat = nist->FindOrBuildMaterial("Lu2SiO5");
+  // G4Material* cryst_mat = nist->FindOrBuildMaterial("Lu2SiO5");
 
   //
   // World
   //
-  G4double world_sizeXY = 2.4 * ring_R2;
-  G4double world_sizeZ = 1.2 * detector_dZ;
+  // G4double world_sizeXY = 2.4 * ring_R2;
+  // G4double world_sizeZ = 1.2 * detector_dZ;
+
+  G4double world_sizeXY = 1 * m;
+  G4double world_sizeZ = 1 * m;
 
   auto solidWorld =
     new G4Box("World",  // its name
@@ -142,87 +199,87 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   //
   // ring
   //
-  auto solidRing = new G4Tubs("Ring", ring_R1, ring_R2, 0.5 * cryst_dX, 0., twopi);
+  // auto solidRing = new G4Tubs("Ring", ring_R1, ring_R2, 0.5 * cryst_dX, 0., twopi);
 
-  auto logicRing = new G4LogicalVolume(solidRing,  // its solid
-                                       default_mat,  // its material
-                                       "Ring");  // its name
+  // auto logicRing = new G4LogicalVolume(solidRing,  // its solid
+  //                                      default_mat,  // its material
+  //                                      "Ring");  // its name
 
   //
   // define crystal
   //
-  G4double gap = 0.5 * mm;  // a gap for wrapping
-  G4double dX = cryst_dX - gap, dY = cryst_dY - gap;
-  auto solidCryst = new G4Box("crystal", dX / 2, dY / 2, cryst_dZ / 2);
+  // G4double gap = 0.5 * mm;  // a gap for wrapping
+  // G4double dX = cryst_dX - gap, dY = cryst_dY - gap;
+  // auto solidCryst = new G4Box("crystal", dX / 2, dY / 2, cryst_dZ / 2);
 
-  auto logicCryst = new G4LogicalVolume(solidCryst,  // its solid
-                                        cryst_mat,  // its material
-                                        "CrystalLV");  // its name
+  // auto logicCryst = new G4LogicalVolume(solidCryst,  // its solid
+  //                                       cryst_mat,  // its material
+  //                                       "CrystalLV");  // its name
 
   // place crystals within a ring
   //
-  for (G4int icrys = 0; icrys < nb_cryst; icrys++) {
-    G4double phi = icrys * dPhi;
-    G4RotationMatrix rotm = G4RotationMatrix();
-    rotm.rotateY(90 * deg);
-    rotm.rotateZ(phi);
-    G4ThreeVector uz = G4ThreeVector(std::cos(phi), std::sin(phi), 0.);
-    G4ThreeVector position = (ring_R1 + 0.5 * cryst_dZ) * uz;
-    G4Transform3D transform = G4Transform3D(rotm, position);
+  // for (G4int icrys = 0; icrys < nb_cryst; icrys++) {
+  //   G4double phi = icrys * dPhi;
+  //   G4RotationMatrix rotm = G4RotationMatrix();
+  //   rotm.rotateY(90 * deg);
+  //   rotm.rotateZ(phi);
+  //   G4ThreeVector uz = G4ThreeVector(std::cos(phi), std::sin(phi), 0.);
+  //   G4ThreeVector position = (ring_R1 + 0.5 * cryst_dZ) * uz;
+  //   G4Transform3D transform = G4Transform3D(rotm, position);
 
-    new G4PVPlacement(transform,  // rotation,position
-                      logicCryst,  // its logical volume
-                      "crystal",  // its name
-                      logicRing,  // its mother  volume
-                      false,  // no boolean operation
-                      icrys,  // copy number
-                      fCheckOverlaps);  // checking overlaps
-  }
+  //   new G4PVPlacement(transform,  // rotation,position
+  //                     logicCryst,  // its logical volume
+  //                     "crystal",  // its name
+  //                     logicRing,  // its mother  volume
+  //                     false,  // no boolean operation
+  //                     icrys,  // copy number
+  //                     fCheckOverlaps);  // checking overlaps
+  // }
 
   //
   // full detector
   //
-  auto solidDetector = new G4Tubs("Detector", ring_R1, ring_R2, 0.5 * detector_dZ, 0., twopi);
+  // auto solidDetector = new G4Tubs("Detector", ring_R1, ring_R2, 0.5 * detector_dZ, 0., twopi);
 
-  auto logicDetector = new G4LogicalVolume(solidDetector,  // its solid
-                                           default_mat,  // its material
-                                           "Detector");  // its name
+  // auto logicDetector = new G4LogicalVolume(solidDetector,  // its solid
+  //                                          default_mat,  // its material
+  //                                          "Detector");  // its name
 
   //
   // place rings within detector
   //
-  G4double OG = -0.5 * (detector_dZ + cryst_dX);
-  for (G4int iring = 0; iring < nb_rings; iring++) {
-    OG += cryst_dX;
-    new G4PVPlacement(nullptr,  // no rotation
-                      G4ThreeVector(0, 0, OG),  // position
-                      logicRing,  // its logical volume
-                      "ring",  // its name
-                      logicDetector,  // its mother  volume
-                      false,  // no boolean operation
-                      iring,  // copy number
-                      fCheckOverlaps);  // checking overlaps
-  }
+  // G4double OG = -0.5 * (detector_dZ + cryst_dX);
+  // for (G4int iring = 0; iring < nb_rings; iring++) {
+  //   OG += cryst_dX;
+  //   new G4PVPlacement(nullptr,  // no rotation
+  //                     G4ThreeVector(0, 0, OG),  // position
+  //                     logicRing,  // its logical volume
+  //                     "ring",  // its name
+  //                     logicDetector,  // its mother  volume
+  //                     false,  // no boolean operation
+  //                     iring,  // copy number
+  //                     fCheckOverlaps);  // checking overlaps
+  // }
 
   //
   // place detector in world
   //
-  new G4PVPlacement(nullptr,  // no rotation
-                    G4ThreeVector(),  // at (0,0,0)
-                    logicDetector,  // its logical volume
-                    "Detector",  // its name
-                    logicWorld,  // its mother  volume
-                    false,  // no boolean operation
-                    0,  // copy number
-                    fCheckOverlaps);  // checking overlaps
+  // new G4PVPlacement(nullptr,  // no rotation
+  //                   G4ThreeVector(),  // at (0,0,0)
+  //                   logicDetector,  // its logical volume
+  //                   "Detector",  // its name
+  //                   logicWorld,  // its mother  volume
+  //                   false,  // no boolean operation
+  //                   0,  // copy number
+  //                   fCheckOverlaps);  // checking overlaps
 
   //
   // implanter crystal, thin disk, 2 mm thickness
   //
-  G4double sample_radius = 2 * cm;
-  G4double sample_dZ = 1 * mm;
-  G4double density;
-	G4int numberElements;  
+  G4double sample_radius = 1 * cm;
+  G4double sample_dZ = 2 * mm; // thickness varies from 0.2 mm to 2 mm with a step of 0.1 mm
+  // G4double density;
+	// G4int numberElements;  
   G4NistManager* man=G4NistManager::Instance();
 	G4Element* K = man->FindOrBuildElement (19);
 	G4Element* Cl = man->FindOrBuildElement(17);
@@ -236,6 +293,17 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
                                           KCl,  // its material
                                           "sampleLV");  // its name
 
+
+  // place new beta in world
+
+  new G4PVPlacement(nullptr,  // no rotation
+                    G4ThreeVector(0,0,50),  // at (0,0,0)
+                    logicBeta,  // its logical volume
+                    "betaFront",  // its name
+                    logicWorld,  // its mother  volume
+                    false,  // no boolean operation
+                    0,  // copy number
+                    fCheckOverlaps);  // checking overlaps
   
   // place sample in world
   
@@ -250,8 +318,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   // Visualization attributes
   //
-  logicRing->SetVisAttributes(G4VisAttributes::GetInvisible());
-  logicDetector->SetVisAttributes(G4VisAttributes::GetInvisible());
+  // logicRing->SetVisAttributes(G4VisAttributes::GetInvisible());
+  // logicDetector->SetVisAttributes(G4VisAttributes::GetInvisible());
 
   // Print materials
   // G4cout << *(G4Material::GetMaterialTable()) << G4endl;
