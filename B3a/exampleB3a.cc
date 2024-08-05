@@ -30,6 +30,8 @@
 #include "ActionInitialization.hh"
 #include "DetectorConstruction.hh"
 #include "PhysicsList.hh"
+#include "EMPhysics.hh"
+#include "G4SystemOfUnits.hh"
 
 #include "G4AnalysisManager.hh"
 #include "G4RunManagerFactory.hh"
@@ -67,7 +69,7 @@ int main(int argc, char** argv)
   //
   runManager->SetUserInitialization(new B3::DetectorConstruction);
   //
-  runManager->SetUserInitialization(new B3::PhysicsList);
+  runManager->SetUserInitialization(new B3::PhysicsList());
 
   // Set user action initialization
   //
