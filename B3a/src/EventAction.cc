@@ -62,7 +62,7 @@ void EventAction::EndOfEventAction(const G4Event* evt)
   // Get hits collections IDs
   if (fCollID_betaBack < 0) {
     G4SDManager* SDMan = G4SDManager::GetSDMpointer();
-    fCollID_betaFront = SDMan->GetCollectionID("betaFront/eDep");
+    fCollID_betaFront = SDMan->GetCollectionID("betaFront/eDep"); // change to betaF and betaB when using the new geometry
     fCollID_betaBack = SDMan->GetCollectionID("betaBack/eDep");
     fCollID_sample = SDMan->GetCollectionID("sample/eDep");
     // fCollID_cryst = SDMan->GetCollectionID("crystal/edep");
@@ -84,7 +84,7 @@ void EventAction::EndOfEventAction(const G4Event* evt)
 
   // Energy in betaFront
 
-    G4THitsMap<G4double>* eventMap2 = (G4THitsMap<G4double>*)(HCE->GetHC(fCollID_betaFront));
+    G4THitsMap<G4double>* eventMap2 = (G4THitsMap<G4double>*)(HCE->GetHC(fCollID_sample));
     // G4AnalysisManager *analysisManager = G4AnalysisManager::Instance();
 
     double energyDeposit = 0;
@@ -94,7 +94,7 @@ void EventAction::EndOfEventAction(const G4Event* evt)
 		energyDeposit = *((*eventMap2)[0]);	 
 	}
 	// if(eventMap2->entries() !=0)
-	// 	std::cout << "!!!" << "front" << " " << fCollID_betaFront << " " << energyDeposit/keV << " " << eventMap2->entries() << std::endl;
+	// 	std::cout << "!!!" << "sample" << " " << fCollID_sample << " " << energyDeposit/keV << " keV  " << eventMap2->entries() << std::endl;
 
   // // Energy in betaBAck
 

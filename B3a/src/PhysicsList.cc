@@ -1,43 +1,64 @@
-// $Id: PhysicsList.cc 68752 2016-11-28 A. Fijalkowska $
 //
-/// \file PhysicsList.cc
-/// \brief Implementation of the PhysicsList class based on optical/LXe/LXePhysicsList 
+// ********************************************************************
+// * License and Disclaimer                                           *
+// *                                                                  *
+// * The  Geant4 software  is  copyright of the Copyright Holders  of *
+// * the Geant4 Collaboration.  It is provided  under  the terms  and *
+// * conditions of the Geant4 Software License,  included in the file *
+// * LICENSE and available at  http://cern.ch/geant4/license .  These *
+// * include a list of copyright holders.                             *
+// *                                                                  *
+// * Neither the authors of this software system, nor their employing *
+// * institutes,nor the agencies providing financial support for this *
+// * work  make  any representation or  warranty, express or implied, *
+// * regarding  this  software system or assume any liability for its *
+// * use.  Please see the license in the file  LICENSE  and URL above *
+// * for the full disclaimer and the limitation of liability.         *
+// *                                                                  *
+// * This  code  implementation is the result of  the  scientific and *
+// * technical work of the GEANT4 collaboration.                      *
+// * By using,  copying,  modifying or  distributing the software (or *
+// * any work based  on the software)  you  agree  to acknowledge its *
+// * use  in  resulting  scientific  publications,  and indicate your *
+// * acceptance of all terms of the Geant4 Software license.          *
+// ********************************************************************
 //
 //
-#include "PhysicsList.hh"
-#include "GeneralPhysics.hh"
-#include "EMPhysics.hh"
-#include "G4SystemOfUnits.hh"
+/// \file B3/B3a/src/PhysicsList.cc
+/// \brief Implementation of the B3::PhysicsList class
 
-using namespace B3;
+#include "PhysicsList.hh" // copy
+
+#include "G4DecayPhysics.hh"
+#include "G4EmStandardPhysics.hh"
+#include "G4RadioactiveDecayPhysics.hh"
 
 namespace B3
 {
 
-PhysicsList::PhysicsList() : G4VModularPhysicsList()
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+PhysicsList::PhysicsList()
 {
-  // default cut value  (1.0mm)
-  defaultCutValue = 0.000001 * mm;
+  SetVerboseLevel(1);
 
-  // General Physics
-  RegisterPhysics( new GeneralPhysics("general") );
+  // Default physics
+  RegisterPhysics(new G4DecayPhysics());
 
-  // EM Physics
-  RegisterPhysics( new EMPhysics("standard EM"));
+  // EM physics
+  RegisterPhysics(new G4EmStandardPhysics());
+
+  // Radioactive decay
+  RegisterPhysics(new G4RadioactiveDecayPhysics());
 }
 
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-PhysicsList::~PhysicsList() {}
-
-
-void PhysicsList::SetCuts(){
-  //  " G4VUserPhysicsList::SetCutsWithDefault" method sets
-  //   the default cut value for all particle types
-  SetCutsWithDefault();
+void PhysicsList::SetCuts()
+{
+  G4VUserPhysicsList::SetCuts();
 }
 
-}
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-
-
-
+}  // namespace B3

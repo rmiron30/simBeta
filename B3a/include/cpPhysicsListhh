@@ -1,0 +1,28 @@
+/// \file PhysicsList.hh
+/// \brief Definition of the PhysicsList class
+//   VITO GEANT physics list adapted for B3
+
+#ifndef B3PhysicsList_h
+#define B3PhysicsList_h 1
+
+#include "G4VModularPhysicsList.hh"
+// using namespace B3;
+
+namespace B3
+{
+
+class PhysicsList: public G4VModularPhysicsList
+{
+  public:
+
+    PhysicsList();
+    virtual ~PhysicsList();
+
+  public:
+    virtual void SetCuts();
+
+};
+
+}
+
+#endif
