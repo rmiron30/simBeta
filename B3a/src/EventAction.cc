@@ -73,7 +73,7 @@ void EventAction::EndOfEventAction(const G4Event* evt)
   // const G4double eThreshold = 500 * keV;
   G4int nbOfFired = 0;
 
-  auto evtMap = static_cast<G4THitsMap<G4double>*>(HCE->GetHC(fCollID_sample));
+  // auto evtMap = static_cast<G4THitsMap<G4double>*>(HCE->GetHC(fCollID_sample));
 
   // for (auto& mapElement : (*evtMap->GetMap())) {
   //   auto edep = *(mapElement.second);
@@ -84,7 +84,7 @@ void EventAction::EndOfEventAction(const G4Event* evt)
 
   // Energy in betaFront
 
-    G4THitsMap<G4double>* eventMap2 = (G4THitsMap<G4double>*)(HCE->GetHC(fCollID_sample));
+    G4THitsMap<G4double>* eventMap2 = (G4THitsMap<G4double>*)(HCE->GetHC(fCollID_betaFront));
     // G4AnalysisManager *analysisManager = G4AnalysisManager::Instance();
 
     double energyDeposit = 0;

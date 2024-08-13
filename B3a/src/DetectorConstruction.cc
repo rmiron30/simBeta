@@ -91,7 +91,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     // G4VPhysicalVolume* worldPhys = ConstructWorld();
   G4String prefix = "/home/ilaria/Simulations/isolde_geant4_elements/Main-elements/";
   G4ThreeVector pos(0,0,0);
-  BetaDet* betaDet = new BetaDet(prefix);
+  // BetaDet* betaDet = new BetaDet(prefix);
 
   // Define new Beta detectors with the good geometry
 
@@ -139,19 +139,22 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   auto logicBetaF = new G4LogicalVolume(volume5,  // its solid
                                            ej200,  // its material
-                                           "betaF");  // its name
+                                           "betaFront");  // its name
 
   logicBetaF->SetVisAttributes(BetaDetVis);
 
   auto logicBetaB = new G4LogicalVolume(volume10,  // its solid
                                            ej200,  // its material
-                                           "betaB");  // its name
+                                           "betaBack");  // its name
 
   logicBetaB->SetVisAttributes(BetaDetVis);
   
   // //
   G4NistManager* nist = G4NistManager::Instance();
   G4Material* default_mat = nist->FindOrBuildMaterial("G4_AIR");
+  G4Material* vacuum = new G4Material("GalacticVacuum", 1., 1.01*g/mole,
+                           CLHEP::universe_mean_density, 
+                           kStateGas, 3.e-18*pascal, 2.73*kelvin);
 
   G4double world_sizeXY = 1 * m;
   G4double world_sizeZ = 1 * m;
@@ -161,7 +164,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
               0.5 * world_sizeXY, 0.5 * world_sizeXY, 0.5 * world_sizeZ);  // its size
 
   auto logicWorld = new G4LogicalVolume(solidWorld,  // its solid
-                                        default_mat,  // its material
+                                        vacuum,  // its material
                                         "World");  // its name
 
   auto physWorld = new G4PVPlacement(nullptr,  // no rotation
@@ -175,7 +178,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   // betaDet->Place(0, pos, "BetaDet", logicWorld);
       
-  betaDet->MakeSensitiveDet();
+  // betaDet->MakeSensitiveDet();
 
   //
   // implanter crystal, thin disk, 2 mm thickness
@@ -183,7 +186,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4double sample_radius = 1 * cm; // 1 cm
   G4double sample_dZ = 2 * mm; // thickness varies from 0.2 mm to 2 mm with a step of 0.1 mm
   // G4double density;
-	// G4int numberElements;  
+	// G4int numberElements; 
   G4NistManager* man=G4NistManager::Instance();
 	G4Element* K = man->FindOrBuildElement (19);
 	G4Element* Cl = man->FindOrBuildElement(17);
@@ -208,7 +211,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   new G4PVPlacement(nullptr,  // no rotation
                     G4ThreeVector(0,0,-28),  // at (0,0,0)
                     logicBetaF,  // its logical volume
-                    "betaF",  // its name
+                    "betaFront",  // its name
                     logicWorld,  // its mother  volume
                     false,  // no boolean operation
                     0,  // copy number
@@ -217,7 +220,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   new G4PVPlacement(nullptr,  // no rotation
                     G4ThreeVector(0,0,+28),  // at (0,0,0)
                     logicBetaB,  // its logical volume
-                    "betaB",  // its name
+                    "betaBack",  // its name
                     logicWorld,  // its mother  volume
                     false,  // no boolean operation
                     0,  // copy number
@@ -247,17 +250,17 @@ void DetectorConstruction::ConstructSDandField()
 
   // make sensitive the 2 beta detectors
 
-  // auto betaFront = new G4MultiFunctionalDetector("betaF");         // the new geometry, actualized
-  // G4SDManager::GetSDMpointer()->AddNewDetector(betaFront);
-  // G4VPrimitiveScorer* primitivF = new G4PSEnergyDeposit("eDep");
-  // betaFront->RegisterPrimitive(primitivF);
-  // SetSensitiveDetector("betaF", betaFront);
+  auto betaFront = new G4MultiFunctionalDetector("betaFront");         // the new geometry, actualized
+  G4SDManager::GetSDMpointer()->AddNewDetector(betaFront);
+  G4VPrimitiveScorer* primitivF = new G4PSEnergyDeposit("eDep");
+  betaFront->RegisterPrimitive(primitivF);
+  SetSensitiveDetector("betaFront", betaFront);
 
-  // auto betaBack = new G4MultiFunctionalDetector("betaB");
-  // G4SDManager::GetSDMpointer()->AddNewDetector(betaBack);
-  // G4VPrimitiveScorer* primitivB = new G4PSEnergyDeposit("eDep");
-  // betaBack->RegisterPrimitive(primitivB);
-  // SetSensitiveDetector("betaB", betaBack);
+  auto betaBack = new G4MultiFunctionalDetector("betaBack");
+  G4SDManager::GetSDMpointer()->AddNewDetector(betaBack);
+  G4VPrimitiveScorer* primitivB = new G4PSEnergyDeposit("eDep");
+  betaBack->RegisterPrimitive(primitivB);
+  SetSensitiveDetector("betaBack", betaBack);
 
   // declare crystal as a MultiFunctionalDetector scorer
   //
