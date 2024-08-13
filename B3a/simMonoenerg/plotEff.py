@@ -1,0 +1,125 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+dataBack = pd.read_csv("resultsBack3.csv")
+dataFront = pd.read_csv("resultsFront3.csv")
+
+energy = np.array(dataBack.iloc[:,0])
+dZ = np.array([0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,2])
+
+# plot efficiency as function of thickness for one energy
+'''
+effBack1 = np.array(dataBack.iloc[:,21])
+effBack2 = np.array(dataBack.iloc[:,2])
+dZ = np.array([0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,2])
+eff1mev = np.array(dataBack.iloc[4,:])
+eff1mev = np.delete(eff1mev,0)
+eff2mev = np.array(dataBack.iloc[5,:])
+eff2mev = np.delete(eff2mev,0)
+eff5mev = np.array(dataBack.iloc[6,:])
+eff5mev = np.delete(eff5mev,0)
+eff05mev = np.array(dataBack.iloc[3,:])
+eff05mev = np.delete(eff05mev,0)
+plt.figure(1)
+plt.plot(energy,effBack1, marker ="o", label = "2 mm")
+plt.plot(energy,effBack2, marker ="o", label = "0.1 mm")
+plt.xlabel("Energy (MeV)")
+plt.ylabel("Efficiency")
+plt.ylim(-0.01,0.3)
+plt.legend()
+plt.title("back")
+plt.figure(2)
+plt.plot(dZ, eff1mev, marker ="o", label = "1 MeV")
+plt.plot(dZ, eff2mev, marker ="o", label = "2 MeV")
+plt.plot(dZ, eff5mev, marker ="o", label = "5 MeV")
+plt.plot(dZ, eff05mev, marker ="o", label = "0.5 MeV")
+plt.xlabel("Thickness (mm)")
+plt.ylabel("Efficiency")
+plt.ylim(-0.01,0.3)
+# plt.xscale('log')
+plt.legend()
+plt.title("back")
+
+effFront1 = np.array(dataFront.iloc[:,21])
+effFront2 = np.array(dataFront.iloc[:,2])
+dZ = np.array([0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,2])
+eff1mev = np.array(dataFront.iloc[4,:])
+eff1mev = np.delete(eff1mev,0)
+eff2mev = np.array(dataFront.iloc[5,:])
+eff2mev = np.delete(eff2mev,0)
+eff5mev = np.array(dataFront.iloc[6,:])
+eff5mev = np.delete(eff5mev,0)
+eff05mev = np.array(dataFront.iloc[3,:])
+eff05mev = np.delete(eff05mev,0)
+plt.figure(3)
+plt.plot(energy,effFront1, marker ="o", label = "2 mm")
+plt.plot(energy,effFront2, marker ="o", label = "0.1 mm")
+plt.xlabel("Energy (MeV)")
+plt.ylabel("Efficiency")
+plt.ylim(-0.01,0.3)
+plt.legend()
+plt.title("front")
+plt.figure(4)
+plt.plot(dZ, eff1mev, marker ="o", label = "1 MeV")
+plt.plot(dZ, eff2mev, marker ="o", label = "2 MeV")
+plt.plot(dZ, eff5mev, marker ="o", label = "5 MeV")
+plt.plot(dZ, eff05mev, marker ="o", label = "0.5 MeV")
+plt.xlabel("Thickness (mm)")
+plt.ylabel("Efficiency")
+plt.ylim(-0.01,0.3)
+# plt.xscale('log')
+plt.legend()
+plt.title("front")
+'''
+
+plt.figure(1)
+for i in range(9):
+    eff = np.array(dataFront.iloc[i,:])
+    en = eff[0]
+    eff = np.delete(eff, 0)
+    plt.plot(dZ, eff, marker = "o", label = "{} Mev".format(en))
+    plt.xlabel("Thickness (mm)")
+    plt.ylabel("Efficiency")
+    plt.ylim(-0.01,0.3)
+    plt.title("front")
+    plt.legend()
+
+plt.figure(2)
+for i in range(len(dZ)):
+    eff = np.array(dataFront.iloc[:,i+1])
+    dz = dZ[i]
+    # eff = np.delete(eff,0)
+    plt.plot(energy, eff, marker = 'o', label = "{} mm".format(dz))
+    plt.xlabel("Energy (MeV)")
+    plt.ylabel("Efficiency")
+    plt.ylim(-0.01,0.3)
+    plt.legend()
+    plt.title("front")
+
+
+plt.figure(5)
+for i in range(9):
+    eff = np.array(dataBack.iloc[i,:])
+    en = eff[0]
+    eff = np.delete(eff, 0)
+    plt.plot(dZ, eff, marker = "o", label = "{} Mev".format(en))
+    plt.xlabel("Thickness (mm)")
+    plt.ylabel("Efficiency")
+    plt.ylim(-0.01,0.3)
+    plt.title("back")
+    plt.legend()
+
+plt.figure(6)
+for i in range(len(dZ)):
+    eff = np.array(dataBack.iloc[:,i+1])
+    dz = dZ[i]
+    # eff = np.delete(eff,0)
+    plt.plot(energy, eff, marker = 'o', label = "{} mm".format(dz))
+    plt.xlabel("Energy (MeV)")
+    plt.ylabel("Efficiency")
+    plt.ylim(-0.01,0.3)
+    plt.legend()
+    plt.title("back")
+
+plt.show()
