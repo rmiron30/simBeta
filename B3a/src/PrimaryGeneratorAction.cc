@@ -121,7 +121,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* event)
   // isotropic emission
   // the plane where the source is located is defined by x and y coordinates
   //
-  G4double x0  = 0*cm, y0  = 0*cm, z0  = - 0.5 * 2 * mm; // the minus - front det is the one on the right, so the source is on the right side of the crystal
+  G4double x0  = 0*cm, y0  = 0*cm, z0  = - 0.5 * 2.0 * mm; // the minus - front det is the one on the right, so the source is on the right side of the crystal
   // G4double dx0 = 0*cm, dy0 = 0*cm, dz0 = 0*cm;
   // G4double x0 = 0 * cm, y0 = 0 * cm, z0 = 0 * cm;
   G4double dx0 = 0.5 * cm, dy0 = 0.5 * cm, dz0 = 0.5 * cm;

@@ -62,10 +62,10 @@ void EventAction::EndOfEventAction(const G4Event* evt)
   // Get hits collections IDs
   if (fCollID_betaBack < 0) {
     G4SDManager* SDMan = G4SDManager::GetSDMpointer();
-    fCollID_betaFront = SDMan->GetCollectionID("betaFront/eDep"); // change to betaF and betaB when using the new geometry
+    fCollID_betaFront = SDMan->GetCollectionID("betaFront/eDep"); 
     fCollID_betaBack = SDMan->GetCollectionID("betaBack/eDep");
     fCollID_sample = SDMan->GetCollectionID("sample/eDep");
-    // fCollID_cryst = SDMan->GetCollectionID("crystal/edep");
+
   }
 
   // Energy in crystals : identify 'good events'
