@@ -42,6 +42,9 @@
 #include "G4Material.hh" 
 #include "G4Cache.hh"
 #include "G4MagneticField.hh"
+#include "g4root_defs.hh"
+#include "TH1F.h"
+// #include "TF1.h"
 
 class G4VPhysicalVolume;
 

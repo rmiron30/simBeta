@@ -37,6 +37,8 @@
 #include "G4Event.hh"
 #include "G4ParticleGun.hh"
 #include <vector>
+#include "g4root_defs.hh"
+#include "TH1F.h"
 
 
 class G4ParticleGun;
@@ -63,11 +65,13 @@ class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 
   private:
     G4ParticleGun* fParticleGun = nullptr;
-
+   
   G4ThreeVector GenerateIsotropicDirection( G4double thetaMin = 0,
                                               G4double thetaMax = M_PI,
                                               G4double phiMin = 0,
                                               G4double phiMax = 2.*M_PI);
+  
+  G4double readBetaSpectrum(const char* filename, const char* histname);
 };
 
 }  // namespace B3

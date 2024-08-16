@@ -52,7 +52,9 @@
 #include "CADMesh.hh"
 #include "BetaDet.hh"
 #include "G4SubtractionSolid.hh"
-
+#include "g4root_defs.hh"
+// #include <TH1F.h>
+// #include <TFile.h>
 namespace B3
 {
 
@@ -109,8 +111,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   // 2024 geometry; back from 2023, front is different (made at UTK) -> bigger apperture, smaller thickness, ej204
 
-  G4double beta_dzF = 5 * mm; // beta detectors dimensions
-  G4double diameterF = 20 * mm; // dimensions for the hole
+  // G4double beta_dzF = 5 * mm; // beta detectors dimensions
+  // G4double diameterF = 20 * mm; // dimensions for the hole
 
   G4double atomicMass, z, density;
 	G4int numberElements;
@@ -126,11 +128,11 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
 
   // 2023 geometry
-  // auto solidBetaF = new G4Box("betaF", 0.5 * betaside, 0.5 * betaside, 0.5 * beta_dz); 
-  // auto holeF = new G4Tubs("holeF", 0, 0.5 * diameter, corner_dz,0, twopi);
+  auto solidBetaF = new G4Box("betaF", 0.5 * betaside, 0.5 * betaside, 0.5 * beta_dz); 
+  auto holeF = new G4Tubs("holeF", 0, 0.5 * diameter, corner_dz,0, twopi);
   // 2024 geometry
-  auto solidBetaF = new G4Box("betaF", 0.5 * betaside, 0.5 * betaside, 0.5 * beta_dzF); // uncomment for 2024 geometry
-  auto holeF = new G4Tubs("holeF", 0, 0.5 * diameterF, corner_dz,0, twopi);
+  // auto solidBetaF = new G4Box("betaF", 0.5 * betaside, 0.5 * betaside, 0.5 * beta_dzF); // uncomment for 2024 geometry
+  // auto holeF = new G4Tubs("holeF", 0, 0.5 * diameterF, corner_dz,0, twopi);
 
   auto corner = new G4Box("corner1", 0.5*cornerside, 0.5*cornerside, 0.5*corner_dz);
   G4SubtractionSolid* volume1 = new G4SubtractionSolid("volume1", solidBetaF, holeF);
@@ -211,10 +213,10 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   // G4double sample_radius = 1 * cm, sample_dZ = 2 * mm; // thickness varies from 0.2 mm to 2 mm with a step of 0.1 mm
 
   // 2023 geometry
-  // G4double sample_radius = 0.5 * 12 * mm, sample_dZ = 0.5 * mm; 
+  G4double sample_radius = 0.5 * 12 * mm, sample_dZ = 0.5 * mm; 
 
   // // 2024 geometry
-  G4double sample_radius = 0.5 * 20 * mm, sample_dZ = 2. * mm; 
+  // G4double sample_radius = 0.5 * 20 * mm, sample_dZ = 2. * mm; 
 
   G4NistManager* man=G4NistManager::Instance();
 	G4Element* K = man->FindOrBuildElement (19);
@@ -238,7 +240,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   // place new beta in world
 
   new G4PVPlacement(nullptr,  // no rotation
-                    G4ThreeVector(0,0,-29),  // 29.65 if 2023, 29 if 2024
+                    G4ThreeVector(0,0,-29.65),  // 29.65 if 2023, 29 if 2024
                     logicBetaF,  // its logical volume
                     "betaFront",  // its name
                     logicWorld,  // its mother  volume

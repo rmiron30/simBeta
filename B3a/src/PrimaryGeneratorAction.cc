@@ -40,6 +40,8 @@
 #include "globals.hh"
 #include "G4ParticleDefinition.hh"
 #include "G4UnitsTable.hh"
+#include "g4root_defs.hh"
+#include "TH1F.h"
 
 namespace B3
 {
@@ -99,6 +101,44 @@ G4ThreeVector PrimaryGeneratorAction::GenerateIsotropicDirection( G4double theta
    return randDir;
 }     
 
+G4double PrimaryGeneratorAction::readBetaSpectrum(const char* filename, const char* histname) {
+    std::ifstream betaFile(filename);
+    if (!betaFile.is_open()) {
+        std::cerr << "Error: could not open file " << filename << std::endl;
+        //return TH1F();
+    }
+
+    std::string line;
+    double tmpE = 0., tmpW = 0.;
+    std::vector<double> energies, weights;
+    int nBins = 0;
+    while (std::getline(betaFile, line)) {
+        if (line[0] == '#') continue;
+        std::stringstream iss(line);
+        iss >> tmpE;
+        iss >> tmpW;
+        energies.push_back(tmpE);
+        weights.push_back(tmpW);
+        // std::cout << "Energy: " << tmpE << " Weight: " << tmpW << std::endl;
+        nBins++;
+    }
+
+    std::vector<double> binEdges;
+    for (int i = 0; i < nBins; i++) {
+        binEdges.push_back(energies[i]);
+    }
+    binEdges.push_back(energies[nBins-1] + (energies[nBins-1] - energies[nBins-2]));
+
+    TH1F* hist = new TH1F(histname, "Beta spectrum", nBins, &binEdges[0]);
+    for (int ibin = 0; ibin < nBins; ibin++) {
+        hist->SetBinContent(ibin+1, weights[ibin]);
+    }
+    
+    double randE = hist->GetRandom();
+    delete hist;
+    return randE;
+}
+
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -130,15 +170,19 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* event)
   // // z0 += dz0 * (G4UniformRand() - 0.5);
   // fParticleGun->SetParticlePosition(G4ThreeVector(x0, y0, z0));
   G4double randomPhi = G4UniformRand()*2*M_PI;
-   G4double r = G4UniformRand()*5;
+   G4double r = G4UniformRand()*5*mm;
    G4double x = r*cos(randomPhi);
    G4double y = r*sin(randomPhi);
-   G4double z = -0.5*2*mm;
+   G4double z = -0.5*0.5*mm;
    G4ThreeVector pos = G4ThreeVector(x, y, z);
    fParticleGun->SetParticlePosition(pos);
   G4ThreeVector direction = GenerateIsotropicDirection();
   fParticleGun->SetParticleMomentumDirection(direction);
 
+  
+  G4double randE = readBetaSpectrum("/home/vito-bng/Simulations/simBeta/B3a/build/betaSpectrum.dat", "betaHist");
+  // double randE = betaHist->GetRandom();
+  fParticleGun->SetParticleEnergy(randE);
   // create vertex
   //
   fParticleGun->GeneratePrimaryVertex(event);

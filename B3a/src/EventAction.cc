@@ -84,15 +84,26 @@ void EventAction::EndOfEventAction(const G4Event* evt)
 
   // Energy in betaFront
 
+    G4THitsMap<G4double>* eventMap1 = (G4THitsMap<G4double>*)(HCE->GetHC(fCollID_betaBack));
     G4THitsMap<G4double>* eventMap2 = (G4THitsMap<G4double>*)(HCE->GetHC(fCollID_betaFront));
-    // G4AnalysisManager *analysisManager = G4AnalysisManager::Instance();
+    G4AnalysisManager *analysisManager = G4AnalysisManager::Instance();
 
-    double energyDeposit = 0;
+    double energyDeposit1 = 0;
+    double energyDeposit2 = 0;
+
+  if((*eventMap1)[0] != 0)
+	{
+		energyDeposit1 = *((*eventMap1)[0]);
+    analysisManager->FillH1(1, energyDeposit1/MeV);	 
+	}
 
   if((*eventMap2)[0] != 0)
 	{
-		energyDeposit = *((*eventMap2)[0]);	 
+		energyDeposit2 = *((*eventMap2)[0]);
+    analysisManager->FillH1(2, energyDeposit2/MeV);	 
 	}
+
+    
 	// if(eventMap2->entries() !=0)
 	// 	std::cout << "!!!" << "sample" << " " << fCollID_sample << " " << energyDeposit/keV << " keV  " << eventMap2->entries() << std::endl;
 

@@ -67,6 +67,11 @@ RunAction::RunAction()
   accumulableManager->RegisterAccumulable(fSumDose);
 
   G4AnalysisManager *analysisManager = G4AnalysisManager::Instance();
+  analysisManager->SetDefaultFileType("root");
+  analysisManager->SetVerboseLevel(2);
+  analysisManager->SetFirstHistoId(1);
+  analysisManager->CreateH1("back", "eDep - back", 1000, 0, 14, "MeV");
+  analysisManager->CreateH1("front", "eDep - front", 1000, 0, 14, "MeV");
   // analysisManager->CreateH2("eDep2D","Energy Deposition", 1000, -10 * cm, 10 * cm, 1000, -10 * cm, 10 * cm); // 2D energy deposition
 }
 
@@ -82,6 +87,16 @@ void RunAction::BeginOfRunAction(const G4Run* run)
 
   // inform the runManager to save random number seed
   G4RunManager::GetRunManager()->SetRandomNumberStore(false);
+   if (isMaster)
+    G4Random::showEngineStatus();
+
+  // Get analysis manager
+  G4AnalysisManager *analysisManager = G4AnalysisManager::Instance();
+
+  // Open an output file
+  //
+  G4String fileName = "scoring";
+  analysisManager->OpenFile(fileName);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -133,9 +148,6 @@ void RunAction::EndOfRunAction(const G4Run* run)
     G4cout << G4endl << "--------------------End of Local Run------------------------" << G4endl
            << "  The run was " << nofEvents << " " << partName;
   }
-  G4cout << "; Nb of 'good' e+ annihilations: " << fGoodEvents.GetValue() << G4endl
-         << " Total dose in patient : " << G4BestUnit(fSumDose.GetValue(), "Dose") << G4endl
-         << "------------------------------------------------------------" << G4endl << G4endl;
 
   analysisManager->Write();
   analysisManager->CloseFile();
