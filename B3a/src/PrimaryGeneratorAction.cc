@@ -48,6 +48,8 @@
 
 namespace B3
 {
+
+///////// using MONOENERGETIC BEAMS
 PrimaryGeneratorAction::PrimaryGeneratorAction()
 {
   G4int n_particle = 1;

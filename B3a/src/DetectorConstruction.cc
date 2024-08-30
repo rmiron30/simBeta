@@ -53,8 +53,7 @@
 #include "BetaDet.hh"
 #include "G4SubtractionSolid.hh"
 #include "g4root_defs.hh"
-// #include <TH1F.h>
-// #include <TFile.h>
+
 namespace B3
 {
 
@@ -91,44 +90,45 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 {
   // Define new Beta detectors with the needed geometry for each case
 
-  // initial geometry, used for simMonoenerg simulations (which are displayed in the google sheet)
-
-  // G4double betaside = 50 * mm, beta_dz = 6 * mm; // beta detectors dimensions
-  // G4double corner_dz = 8 * mm, cornerside = 10 * mm, angle = twopi/8; // dimensions for corners which will be substracted
-  // G4double diameter = 10 * mm; // dimensions for the hole
-
   // 2023 geometry; 2 identical detectors, made at CERN
-
+  // COMMON FOR BOTH DETECTORS
   G4double betaside = 62 * mm, beta_dz = 6.3 * mm; // beta detectors dimensions
   G4double corner_dz = 8 * mm, cornerside = 17.7 * mm, angle = twopi/8; // dimensions for corners which will be substracted
   G4double diameter = 10 * mm; // dimensions for the hole
 
   // 2024 geometry; back from 2023, front is different (made at UTK) -> bigger apperture, smaller thickness, ej204
-
+  // UNCOMMENT for FRONT DETECTOR 2024
   // G4double beta_dzF = 5 * mm; // beta detectors dimensions
   // G4double diameterF = 20 * mm; // dimensions for the hole
 
   G4double atomicMass, z, density;
 	G4int numberElements;
   
-  // EJ 200
+  // DEFINITION OF EJ 200
 	G4Element* H  = new G4Element("Hydrogen", "H",  z=1.,  atomicMass =1.008 *g/mole );
 	G4Element* C  = new G4Element("Carbon",   "C",  z=6.,  atomicMass = 12.01*g/mole );
 	G4Material*	ej200 = new G4Material( "ej200", density= 1.023 *g/cm3, numberElements=2 );
 	ej200->AddElement( C,  469 );
 	ej200->AddElement( H,  517);	
 
-  // EJ 204
+  // DEFINITION OF EJ 204
   G4Material*	ej204 = new G4Material( "ej200", density= 1.023 *g/cm3, numberElements=2 );
 	ej204->AddElement( C,  468 );
 	ej204->AddElement( H,  515);
 
-  // 2023 geometry
+  // 2023 geometry - UNCOMMENT THE FOLLOWING 2 LINES FOR BETA FRONT 2023 
   auto solidBetaF = new G4Box("betaF", 0.5 * betaside, 0.5 * betaside, 0.5 * beta_dz); //uncomment for 2023 geometry
   auto holeF = new G4Tubs("holeF", 0, 0.5 * diameter, corner_dz,0, twopi);
-  // 2024 geometry
+  // 2024 geometry - UNCOMMENT THE FOLLOWING 2 LINES FOR BETA FRONT 2024
   // auto solidBetaF = new G4Box("betaF", 0.5 * betaside, 0.5 * betaside, 0.5 * beta_dzF); // uncomment for 2024 geometry
   // auto holeF = new G4Tubs("holeF", 0, 0.5 * diameterF, corner_dz,0, twopi);
+
+  // IMPLANTER CRYSTAL, thin disk
+  // UNCOMMENT FOR 2023 geometry
+  G4double sample_radius = 0.5 * 12 * mm, sample_dZ = 0.5 * mm; 
+
+  // UNCOMMENT FOR 2024 geometry
+  // G4double sample_radius = 0.5 * 20 * mm, sample_dZ = 2. * mm; 
 
   auto corner = new G4Box("corner1", 0.5*cornerside, 0.5*cornerside, 0.5*corner_dz);
   G4SubtractionSolid* volume1 = new G4SubtractionSolid("volume1", solidBetaF, holeF);
@@ -160,13 +160,13 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   BetaDetVis->SetForceSolid(true);
 
   auto logicBetaF = new G4LogicalVolume(volume5,  // its solid
-                                           ej200,  // ej200 2023, ej204 2024
+                                           ej200,  // CHANGE ej200 FOR 2023, ej204 FOR 2024
                                            "betaFront");  // its name                                        
 
   logicBetaF->SetVisAttributes(BetaDetVis);
 
   auto logicBetaB = new G4LogicalVolume(volume10,  // its solid
-                                           ej200,  // ej200 2023, ej204 2024
+                                           ej200,  // ej200 FOR 2023
                                            "betaBack");  // its name
 
   logicBetaB->SetVisAttributes(BetaDetVis);
@@ -189,21 +189,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   auto physWorld = new G4PVPlacement(nullptr, G4ThreeVector(), logicWorld,  "World", nullptr, false, 0, fCheckOverlaps);
 
-  // betaDet->Place(0, pos, "BetaDet", logicWorld);      
-  // betaDet->MakeSensitiveDet();
 
-  //
-  // implanter crystal, thin disk
-  //
-
-  // initial geometry, used for simMonoenerg simulations (which are displayed in the google sheet)
-  // G4double sample_radius = 1 * cm, sample_dZ = 2 * mm; // thickness varies from 0.2 mm to 2 mm with a step of 0.1 mm
-
-  // 2023 geometry
-  G4double sample_radius = 0.5 * 12 * mm, sample_dZ = 0.5 * mm; 
-
-  // // 2024 geometry
-  // G4double sample_radius = 0.5 * 20 * mm, sample_dZ = 2. * mm; 
 
   G4NistManager* man=G4NistManager::Instance();
 	G4Element* K = man->FindOrBuildElement (19);
@@ -227,7 +213,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   // place new beta in world
 
   new G4PVPlacement(nullptr,  // no rotation
-                    G4ThreeVector(0,0,-29.65),  // 29.65 if 2023, 29 if 2024
+                    G4ThreeVector(0,0,-29.65),  // CHANGE TO 29.65 if 2023 geometry, CHANGE TO 29 if 2024 geometry
                     logicBetaF,  // its logical volume
                     "betaFront",  // its name
                     logicWorld,  // its mother  volume
@@ -288,23 +274,6 @@ void DetectorConstruction::ConstructSDandField()
   sample->RegisterPrimitive(primitiv1);
   SetSensitiveDetector("sampleLV", sample);
 }
-
-
-//VITO code to add geometry from STL 
-// void DetectorConstruction::AddElement(G4String stlName, G4Material* material, G4VisAttributes* visAtt)
-// {
-//     G4String stlPath = "../stlNew/"+stlName+".stl";
-//     auto meshSolid = CADMesh::TessellatedMesh::FromSTL(stlPath);
-//     G4VSolid* solid = meshSolid->GetSolid();
-    
-//     G4String solidName = stlName+"Solid";
-//     G4LogicalVolume* logVol = new G4LogicalVolume(solid, material, solidName);
-// 	logVol->SetVisAttributes(visAtt);
-// 	G4String physName = stlName+"Phys";
-// 	// new G4PVPlacement(0, G4ThreeVector(0,0,0), logVol, physName,  worldLogic, 1,0);
-
-
-// }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
