@@ -31,6 +31,7 @@
 #define B3PrimaryGeneratorAction_h 1
 
 #include "G4VUserPrimaryGeneratorAction.hh"
+#include "G4GeneralParticleSource.hh"
 #include "globals.hh"
 
 // VITO
@@ -47,15 +48,9 @@ class G4Event;
 namespace B3
 {
 
-/// The primary generator action class with particle gum.
-///
-/// It defines an ion (F18), at rest, randomly distribued within a zone
-/// in a patient defined in GeneratePrimaries(). Ion F18 can be changed
-/// with the G4ParticleGun commands (see run2.mac).
-
-class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
+  class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 {
-  public:
+    public:
     PrimaryGeneratorAction();
     ~PrimaryGeneratorAction() override;
 
@@ -71,9 +66,27 @@ class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
                                               G4double phiMin = 0,
                                               G4double phiMax = 2.*M_PI);
   
-  G4double readBetaSpectrum(const char* filename, const char* histname);
 };
 
+/* 
+
+class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
+{
+  public:
+    PrimaryGeneratorAction();
+   ~PrimaryGeneratorAction();
+   G4ParticleDefinition* GetParticleDefinition() const { return fParticleDefinition; }
+
+
+    virtual void GeneratePrimaries(G4Event*);
+
+  private:
+    G4GeneralParticleSource* fParticleGun;
+
+    // Initialize the particle definition
+   G4ParticleDefinition* fParticleDefinition; 
+};
+*/
 }  // namespace B3
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
