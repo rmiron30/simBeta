@@ -68,58 +68,38 @@ void EventAction::EndOfEventAction(const G4Event* evt)
 
   }
 
-  // Energy in crystals : identify 'good events'
-  //
-  // const G4double eThreshold = 500 * keV;
   G4int nbOfFired = 0;
 
-  // auto evtMap = static_cast<G4THitsMap<G4double>*>(HCE->GetHC(fCollID_sample));
-
-  // for (auto& mapElement : (*evtMap->GetMap())) {
-  //   auto edep = *(mapElement.second);
-  //   if (edep > 0) 
-  //     energyDeposit = *((*eventMap2)[0]);	 
-  // }
-  // if (nbOfFired == 2) fRunAction->CountEvent();
-
-  // Energy in betaFront
+  // Energy in betaFront, betaBack and crystal sample
 
     G4THitsMap<G4double>* eventMap1 = (G4THitsMap<G4double>*)(HCE->GetHC(fCollID_betaBack));
     G4THitsMap<G4double>* eventMap2 = (G4THitsMap<G4double>*)(HCE->GetHC(fCollID_betaFront));
+    G4THitsMap<G4double>* eventMap3 = (G4THitsMap<G4double>*)(HCE->GetHC(fCollID_sample));
     G4AnalysisManager *analysisManager = G4AnalysisManager::Instance();
 
     double energyDeposit1 = 0;
     double energyDeposit2 = 0;
+    double energyDeposit3 = 0;
 
   if((*eventMap1)[0] != 0)
 	{
 		energyDeposit1 = *((*eventMap1)[0]);
+    // std::cout<<energyDeposit1<<"back"<<std::endl;
     analysisManager->FillH1(1, energyDeposit1/MeV);	 
 	}
 
   if((*eventMap2)[0] != 0)
 	{
 		energyDeposit2 = *((*eventMap2)[0]);
+    // std::cout<<energyDeposit2<<"front"<<std::endl;
     analysisManager->FillH1(2, energyDeposit2/MeV);	 
 	}
-
-    
-	// if(eventMap2->entries() !=0)
-	// 	std::cout << "!!!" << "sample" << " " << fCollID_sample << " " << energyDeposit/keV << " keV  " << eventMap2->entries() << std::endl;
-
-  // // Energy in betaBAck
-
-  // nbOfFired = 0;
-
-  // evtMap = static_cast<G4THitsMap<G4double>*>(HCE->GetHC(fCollID_betaBack));
-
-  // for (auto& mapElement : (*evtMap->GetMap())) {
-  //   auto edep = *(mapElement.second);
-  //   if (edep > 0.000001) ++nbOfFired;
-  //   // auto copyNb  = mapElement.first;
-  //   // G4cout << "\n  cryst" << copyNb << ": " << edep/keV << " keV ";
-  // }
-  // if (nbOfFired > 0) fRunAction->CountEvent();
+  if((*eventMap3)[0] != 0)
+	{
+		energyDeposit3 = *((*eventMap3)[0]);
+    // std::cout<<energyDeposit3<<"sample"<<std::endl;
+    analysisManager->FillH1(3, energyDeposit3/MeV);	 
+	}
 
 }
 

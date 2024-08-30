@@ -70,8 +70,9 @@ RunAction::RunAction()
   analysisManager->SetDefaultFileType("root");
   analysisManager->SetVerboseLevel(2);
   analysisManager->SetFirstHistoId(1);
-  analysisManager->CreateH1("back", "eDep - back", 1000, 0, 14, "MeV");
-  analysisManager->CreateH1("front", "eDep - front", 1000, 0, 14, "MeV");
+  analysisManager->CreateH1("back", "eDep - back", 1000, 0, 5, "MeV");
+  analysisManager->CreateH1("front", "eDep - front", 1000, 0, 5, "MeV");
+  analysisManager->CreateH1("sample", "eDep - sample", 1000, 0, 5, "MeV");
   // analysisManager->CreateH2("eDep2D","Energy Deposition", 1000, -10 * cm, 10 * cm, 1000, -10 * cm, 10 * cm); // 2D energy deposition
 }
 
@@ -92,7 +93,7 @@ void RunAction::BeginOfRunAction(const G4Run* run)
 
   // Get analysis manager
   G4AnalysisManager *analysisManager = G4AnalysisManager::Instance();
-
+  analysisManager->Reset();
   // Open an output file
   //
   G4String fileName = "scoring";
@@ -123,6 +124,13 @@ void RunAction::EndOfRunAction(const G4Run* run)
     partName = particle->GetParticleName();
   }
 
+  // if (generatorAction) {
+  //   G4ParticleDefinition* particle = generatorAction->GetParticleDefinition(); /// GPS
+  //   if (particle) {
+  //     partName = particle->GetParticleName();
+  //   }
+  // }
+
   char timeDir[80];
 
   // Print results
@@ -150,12 +158,12 @@ void RunAction::EndOfRunAction(const G4Run* run)
   }
 
   analysisManager->Write();
-  analysisManager->CloseFile();
+  analysisManager->CloseFile(false);
 
   if (IsMaster()){
       const auto copyOptions = std::filesystem::copy_options::overwrite_existing | std::filesystem::copy_options::recursive;
       std::filesystem::copy("scoring.root", timeDir + std::string("/scoring.root"), copyOptions);
-      std::filesystem::copy("exampleB3.in", timeDir + std::string("/exampleB3.in"), copyOptions);
+      std::filesystem::copy("monobeta.in", timeDir + std::string("/monobeta.in"), copyOptions);
   }
 }
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

@@ -89,12 +89,6 @@ void DetectorConstruction::DefineMaterials()
 
 G4VPhysicalVolume* DetectorConstruction::Construct()
 {
-  // BetaDetectors from VitoGeant
-    // G4VPhysicalVolume* worldPhys = ConstructWorld();
-  G4String prefix = "/home/ilaria/Simulations/isolde_geant4_elements/Main-elements/";
-  G4ThreeVector pos(0,0,0);
-  // BetaDet* betaDet = new BetaDet(prefix);
-
   // Define new Beta detectors with the needed geometry for each case
 
   // initial geometry, used for simMonoenerg simulations (which are displayed in the google sheet)
@@ -125,10 +119,12 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 	ej200->AddElement( H,  517);	
 
   // EJ 204
-
+  G4Material*	ej204 = new G4Material( "ej200", density= 1.023 *g/cm3, numberElements=2 );
+	ej204->AddElement( C,  468 );
+	ej204->AddElement( H,  515);
 
   // 2023 geometry
-  auto solidBetaF = new G4Box("betaF", 0.5 * betaside, 0.5 * betaside, 0.5 * beta_dz); 
+  auto solidBetaF = new G4Box("betaF", 0.5 * betaside, 0.5 * betaside, 0.5 * beta_dz); //uncomment for 2023 geometry
   auto holeF = new G4Tubs("holeF", 0, 0.5 * diameter, corner_dz,0, twopi);
   // 2024 geometry
   // auto solidBetaF = new G4Box("betaF", 0.5 * betaside, 0.5 * betaside, 0.5 * beta_dzF); // uncomment for 2024 geometry
@@ -164,13 +160,13 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   BetaDetVis->SetForceSolid(true);
 
   auto logicBetaF = new G4LogicalVolume(volume5,  // its solid
-                                           ej200,  // its material
+                                           ej200,  // ej200 2023, ej204 2024
                                            "betaFront");  // its name                                        
 
   logicBetaF->SetVisAttributes(BetaDetVis);
 
   auto logicBetaB = new G4LogicalVolume(volume10,  // its solid
-                                           ej200,  // its material
+                                           ej200,  // ej200 2023, ej204 2024
                                            "betaBack");  // its name
 
   logicBetaB->SetVisAttributes(BetaDetVis);
@@ -189,18 +185,9 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     new G4Box("World",  // its name
               0.5 * world_sizeXY, 0.5 * world_sizeXY, 0.5 * world_sizeZ);  // its size
 
-  auto logicWorld = new G4LogicalVolume(solidWorld,  // its solid
-                                        vacuum,  // its material
-                                        "World");  // its name
+  auto logicWorld = new G4LogicalVolume(solidWorld, vacuum, "World"); 
 
-  auto physWorld = new G4PVPlacement(nullptr,  // no rotation
-                                     G4ThreeVector(),  // at (0,0,0)
-                                     logicWorld,  // its logical volume
-                                     "World",  // its name
-                                     nullptr,  // its mother  volume
-                                     false,  // no boolean operation
-                                     0,  // copy number
-                                     fCheckOverlaps);  // checking overlaps
+  auto physWorld = new G4PVPlacement(nullptr, G4ThreeVector(), logicWorld,  "World", nullptr, false, 0, fCheckOverlaps);
 
   // betaDet->Place(0, pos, "BetaDet", logicWorld);      
   // betaDet->MakeSensitiveDet();
@@ -303,21 +290,21 @@ void DetectorConstruction::ConstructSDandField()
 }
 
 
-//VITO
-void DetectorConstruction::AddElement(G4String stlName, G4Material* material, G4VisAttributes* visAtt)
-{
-    G4String stlPath = "../stlNew/"+stlName+".stl";
-    auto meshSolid = CADMesh::TessellatedMesh::FromSTL(stlPath);
-    G4VSolid* solid = meshSolid->GetSolid();
+//VITO code to add geometry from STL 
+// void DetectorConstruction::AddElement(G4String stlName, G4Material* material, G4VisAttributes* visAtt)
+// {
+//     G4String stlPath = "../stlNew/"+stlName+".stl";
+//     auto meshSolid = CADMesh::TessellatedMesh::FromSTL(stlPath);
+//     G4VSolid* solid = meshSolid->GetSolid();
     
-    G4String solidName = stlName+"Solid";
-    G4LogicalVolume* logVol = new G4LogicalVolume(solid, material, solidName);
-	logVol->SetVisAttributes(visAtt);
-	G4String physName = stlName+"Phys";
-	// new G4PVPlacement(0, G4ThreeVector(0,0,0), logVol, physName,  worldLogic, 1,0);
+//     G4String solidName = stlName+"Solid";
+//     G4LogicalVolume* logVol = new G4LogicalVolume(solid, material, solidName);
+// 	logVol->SetVisAttributes(visAtt);
+// 	G4String physName = stlName+"Phys";
+// 	// new G4PVPlacement(0, G4ThreeVector(0,0,0), logVol, physName,  worldLogic, 1,0);
 
 
-}
+// }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 

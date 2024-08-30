@@ -43,11 +43,11 @@
 #include "g4root_defs.hh"
 #include "TH1F.h"
 
+#include "G4Event.hh"
+#include "G4GeneralParticleSource.hh"
+
 namespace B3
 {
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
 PrimaryGeneratorAction::PrimaryGeneratorAction()
 {
   G4int n_particle = 1;
@@ -101,45 +101,6 @@ G4ThreeVector PrimaryGeneratorAction::GenerateIsotropicDirection( G4double theta
    return randDir;
 }     
 
-G4double PrimaryGeneratorAction::readBetaSpectrum(const char* filename, const char* histname) {
-    std::ifstream betaFile(filename);
-    if (!betaFile.is_open()) {
-        std::cerr << "Error: could not open file " << filename << std::endl;
-        //return TH1F();
-    }
-
-    std::string line;
-    double tmpE = 0., tmpW = 0.;
-    std::vector<double> energies, weights;
-    int nBins = 0;
-    while (std::getline(betaFile, line)) {
-        if (line[0] == '#') continue;
-        std::stringstream iss(line);
-        iss >> tmpE;
-        iss >> tmpW;
-        energies.push_back(tmpE);
-        weights.push_back(tmpW);
-        // std::cout << "Energy: " << tmpE << " Weight: " << tmpW << std::endl;
-        nBins++;
-    }
-
-    std::vector<double> binEdges;
-    for (int i = 0; i < nBins; i++) {
-        binEdges.push_back(energies[i]);
-    }
-    binEdges.push_back(energies[nBins-1] + (energies[nBins-1] - energies[nBins-2]));
-
-    TH1F* hist = new TH1F(histname, "Beta spectrum", nBins, &binEdges[0]);
-    for (int ibin = 0; ibin < nBins; ibin++) {
-        hist->SetBinContent(ibin+1, weights[ibin]);
-    }
-    
-    double randE = hist->GetRandom();
-    delete hist;
-    return randE;
-}
-
-
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void PrimaryGeneratorAction::GeneratePrimaries(G4Event* event)
@@ -156,41 +117,51 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* event)
     fParticleGun->SetParticleCharge(ionCharge);
   }
 
-  // randomized position
+  // randomized position on a circular surface
   // the beta source should be located on the surface of the sample
   // isotropic emission
-  // the plane where the source is located is defined by x and y coordinates
-  //
-  // G4double x0  = 0*cm, y0  = 0*cm, z0  = - 0.5 * 2.0 * mm; // the minus - front det is the one on the right, so the source is on the right side of the crystal
-  // // G4double dx0 = 0*cm, dy0 = 0*cm, dz0 = 0*cm;
-  // // G4double x0 = 0 * cm, y0 = 0 * cm, z0 = 0 * cm;
-  // G4double dx0 = 1 * cm, dy0 = 1 * cm, dz0 = 0.5 * cm;
-  // x0 += dx0 * (G4UniformRand() - 0.5);   // emitted from random points on the surface of the crystal
-  // y0 += dy0 * (G4UniformRand() - 0.5);
-  // // z0 += dz0 * (G4UniformRand() - 0.5);
-  // fParticleGun->SetParticlePosition(G4ThreeVector(x0, y0, z0));
   G4double randomPhi = G4UniformRand()*2*M_PI;
-   G4double r = G4UniformRand()*5*mm;
+   G4double r = G4UniformRand()*5*mm; // *10 mm for 2024, *5 mm for 2023
    G4double x = r*cos(randomPhi);
    G4double y = r*sin(randomPhi);
-   G4double z = -0.5*0.5*mm;
+   G4double z = -0.5*0.5*mm; // 2 mm for 2024, 0.5 mm for 2023
    G4ThreeVector pos = G4ThreeVector(x, y, z);
    fParticleGun->SetParticlePosition(pos);
   G4ThreeVector direction = GenerateIsotropicDirection();
   fParticleGun->SetParticleMomentumDirection(direction);
 
-  
-  G4double randE = readBetaSpectrum("/home/vito-bng/Simulations/simBeta/B3a/build/betaSpectrum.dat", "betaHist");
-  // double randE = betaHist->GetRandom();
-  fParticleGun->SetParticleEnergy(randE);
+
   // create vertex
   //
   fParticleGun->GeneratePrimaryVertex(event);
 }
 
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+/* /////////// USING GENERAL PARTICLE SOURCE
+PrimaryGeneratorAction::PrimaryGeneratorAction()
+ : G4VUserPrimaryGeneratorAction(),
+   fParticleGun(0), fParticleDefinition(nullptr)
+{
+   fParticleGun = new G4GeneralParticleSource();
+   fParticleDefinition = fParticleGun->GetParticleDefinition();
+}
+
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-}  // namespace B3
+PrimaryGeneratorAction::~PrimaryGeneratorAction()
+{
+  delete fParticleGun;
+}
 
-// VITO GEANT
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
+{
+  fParticleGun->GeneratePrimaryVertex(anEvent);
+  fParticleDefinition = fParticleGun->GetParticleDefinition();
+}
+*/
+ // namespace B3
+}
 
